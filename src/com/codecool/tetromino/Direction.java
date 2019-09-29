@@ -1,4 +1,4 @@
-package com.codecool.tetris;
+package com.codecool.tetromino;
 
 public enum Direction {
     LEFT,

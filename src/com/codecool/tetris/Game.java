@@ -1,12 +1,13 @@
 package com.codecool.tetris;
 
+import com.codecool.tetromino.Tetromino;
+import com.codecool.tetromino.TetrominoPiece;
 import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Game extends GridPane {
@@ -14,7 +15,7 @@ public class Game extends GridPane {
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
 
-    private Set<Piece> pieces = new HashSet<>();
+    private Set<Tetromino> pieces = new HashSet<>();
 
     public Game() {
         this.setGridLinesVisible(true);
@@ -33,7 +34,9 @@ public class Game extends GridPane {
         this.setPadding(new Insets(30, 300,30,280));
     }
 
-    public void drawPiece(Piece piece) {
-        //TODO: write it
+    public void drawPiece(Tetromino tetromino) {
+        for (TetrominoPiece piece : tetromino.getPieces()) {
+            this.add(piece, piece.getColNum(), piece.getRowNum());
+        }
     }
 }

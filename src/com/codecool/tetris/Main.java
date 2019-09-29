@@ -1,10 +1,11 @@
 package com.codecool.tetris;
 
+import com.codecool.tetromino.Box;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
 
 public class Main extends Application {
 
@@ -13,10 +14,8 @@ public class Main extends Application {
 
         Game game = new Game();
 
-        Rectangle box = new Rectangle(25,25);
-        box.setFill(Color.BLACK);
-
-        game.add(box, 4, 0);
+        Box box = new Box();
+        game.drawPiece(box);
 
 
         primaryStage.setScene(new Scene(game, 800, 600));
