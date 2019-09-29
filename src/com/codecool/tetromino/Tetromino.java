@@ -13,7 +13,20 @@ public abstract class Tetromino {
     TetrominoPiece pieceThree = new TetrominoPiece();
     TetrominoPiece pieceFour = new TetrominoPiece();
 
-    public abstract void move(Direction direction);
+    public void move(Direction direction) {
+        switch (direction) {
+            case LEFT:
+                for (TetrominoPiece piece : getPieces()) {
+                    piece.setColNum(piece.getColNum() - 1);
+                }
+                break;
+            case RIGHT:
+                for (TetrominoPiece piece : getPieces()) {
+                    piece.setColNum(piece.getColNum() + 1);
+                }
+                break;
+        }
+    }
 
     public abstract void transform();
 

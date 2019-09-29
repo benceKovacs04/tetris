@@ -24,12 +24,6 @@ public class Box extends Tetromino {
     }
 
     @Override
-    public void move(Direction direction) {
-        //TODO: do movement
-        ;
-    }
-
-    @Override
     public void transform() {
         //TODO: do transformation
         ;
