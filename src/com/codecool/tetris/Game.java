@@ -36,6 +36,7 @@ public class Game extends GridPane {
 
     public void drawPiece(Tetromino tetromino) {
         for (TetrominoPiece piece : tetromino.getPieces()) {
+            this.getChildren().remove(piece);
             this.add(piece, piece.getColNum(), piece.getRowNum());
         }
     }
