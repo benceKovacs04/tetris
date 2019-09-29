@@ -1,4 +1,4 @@
-package sample;
+package com.codecool.tetris;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -15,6 +15,9 @@ public class Main extends Application {
 
         GridPane root = new GridPane();
         root.setGridLinesVisible(true);
+        root.getStyleClass().add("myGridStyle");
+        root.getStylesheets().add("assets/Main.css");
+
         final int numCols = 10 ;
         final int numRows = 22;
         for (int i = 0; i < numCols; i++) {
