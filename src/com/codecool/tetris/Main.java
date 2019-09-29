@@ -16,7 +16,6 @@ public class Main extends Application {
         Rectangle box = new Rectangle(25,25);
         box.setFill(Color.BLACK);
 
-        //game.getChildren().add(box);
         game.add(box, 4, 0);
 
 

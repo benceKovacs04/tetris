@@ -5,10 +5,16 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Game extends GridPane {
 
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
+
+    private Set<Piece> pieces = new HashSet<>();
 
     public Game() {
         this.setGridLinesVisible(true);
@@ -25,5 +31,9 @@ public class Game extends GridPane {
         }
 
         this.setPadding(new Insets(30, 300,30,280));
+    }
+
+    public void drawPiece(Piece piece) {
+        //TODO: write it
     }
 }
