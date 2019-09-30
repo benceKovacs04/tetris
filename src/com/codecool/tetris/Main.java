@@ -15,6 +15,7 @@ public class Main extends Application {
         Game game = new Game();
 
         game.spawnNewActiveTetromino();
+        game.drawActivePiece();
 
         game.init();
 
