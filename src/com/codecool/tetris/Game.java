@@ -1,9 +1,6 @@
 package com.codecool.tetris;
 
-import com.codecool.tetromino.BoxTetro;
-import com.codecool.tetromino.Direction;
-import com.codecool.tetromino.Tetromino;
-import com.codecool.tetromino.TetrominoPiece;
+import com.codecool.tetromino.*;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -18,6 +15,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
     private GameTimer gameTimer = new GameTimer();
+    private TetrominoFactory tetrominoFactory = new TetrominoFactory(this);
 
     public Tetromino activeTetromino;
 
@@ -46,7 +44,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     @Override
     public void spawnNewActiveTetromino() {
-        this.activeTetromino = new BoxTetro(this);
+        this.activeTetromino = tetrominoFactory.getRandomTetromino();
     }
 
     @Override
