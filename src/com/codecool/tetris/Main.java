@@ -1,14 +1,10 @@
 package com.codecool.tetris;
 
-import com.codecool.tetromino.Box;
-import com.codecool.tetromino.Direction;
+import com.codecool.tetromino.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 
 
 public class Main extends Application {
@@ -18,18 +14,18 @@ public class Main extends Application {
 
         Game game = new Game();
 
-        Box box = new Box();
-        game.drawPiece(box);
+        ZTetro tetro = new ZTetro();
+        game.drawPiece(tetro);
 
         primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case A:
-                    box.move(Direction.LEFT);
-                    game.drawPiece(box);
+                    tetro.move(Direction.LEFT);
+                    game.drawPiece(tetro);
                     break;
                 case D:
-                    box.move(Direction.RIGHT);
-                    game.drawPiece(box);
+                    tetro.move(Direction.RIGHT);
+                    game.drawPiece(tetro);
                     break;
             }
         });

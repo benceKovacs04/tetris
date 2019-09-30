@@ -15,6 +15,7 @@ public class Game extends GridPane {
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
 
+
     private Set<Tetromino> pieces = new HashSet<>();
 
     public Game() {

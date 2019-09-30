@@ -2,9 +2,9 @@ package com.codecool.tetromino;
 
 import javafx.scene.paint.Color;
 
-public class Box extends Tetromino {
+public class BoxTetro extends Tetromino {
 
-    public Box() {
+    public BoxTetro() {
         pieceOne.setColNum(4);
         pieceOne.setRowNum(0);
 
