@@ -2,9 +2,9 @@ package com.codecool.tetris;
 
 public class GameLoop {
 
-    private Gameplay game;
+    private GameTick game;
 
-    public GameLoop(Gameplay game) {
+    public GameLoop(GameTick game) {
         this.game = game;
     }
 

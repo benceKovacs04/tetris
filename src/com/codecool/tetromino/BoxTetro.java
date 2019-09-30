@@ -1,10 +1,13 @@
 package com.codecool.tetromino;
 
+import com.codecool.tetris.TetrominoSetter;
 import javafx.scene.paint.Color;
 
 public class BoxTetro extends Tetromino {
 
-    public BoxTetro() {
+    public BoxTetro(TetrominoSetter game) {
+        super(game);
+
         pieceOne.setColNum(4);
         pieceOne.setRowNum(0);
 

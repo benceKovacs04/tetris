@@ -1,6 +1,8 @@
 package com.codecool.tetromino;
 
 
+import com.codecool.tetris.TetrominoSetter;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -12,6 +14,12 @@ public abstract class Tetromino {
     TetrominoPiece pieceTwo = new TetrominoPiece();
     TetrominoPiece pieceThree = new TetrominoPiece();
     TetrominoPiece pieceFour = new TetrominoPiece();
+
+    private TetrominoSetter game;
+
+    public Tetromino(TetrominoSetter game) {
+        this.game = game;
+    }
 
     public void move(Direction direction) {
         switch (direction) {
@@ -37,6 +45,8 @@ public abstract class Tetromino {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setRowNum(piece.getRowNum() + 1);
                     }
+                } else {
+                    game.spawnNewActiveTetromino();
                 }
         }
     }

@@ -14,20 +14,18 @@ public class Main extends Application {
 
         Game game = new Game();
 
-        ZTetro tetro = new ZTetro();
-        game.setActiveTetromino(tetro);
-        game.drawActivePiece();
+        game.spawnNewActiveTetromino();
 
         game.init();
 
         primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case A:
-                    tetro.move(Direction.LEFT);
+                    game.activeTetromino.move(Direction.LEFT);
                     game.drawActivePiece();
                     break;
                 case D:
-                    tetro.move(Direction.RIGHT);
+                    game.activeTetromino.move(Direction.RIGHT);
                     game.drawActivePiece();
                     break;
             }

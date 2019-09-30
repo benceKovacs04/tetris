@@ -1,5 +1,6 @@
 package com.codecool.tetris;
 
+import com.codecool.tetromino.BoxTetro;
 import com.codecool.tetromino.Direction;
 import com.codecool.tetromino.Tetromino;
 import com.codecool.tetromino.TetrominoPiece;
@@ -11,13 +12,13 @@ import javafx.scene.layout.RowConstraints;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Game extends GridPane implements Gameplay {
+public class Game extends GridPane implements GameTick, TetrominoSetter {
 
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
     private GameTimer gameTimer = new GameTimer();
 
-    private Tetromino activeTetromino;
+    public Tetromino activeTetromino;
 
     private Set<Tetromino> pieces = new HashSet<>();
 
@@ -44,8 +45,9 @@ public class Game extends GridPane implements Gameplay {
         gameTimer.play();
     }
 
-    public void setActiveTetromino(Tetromino tetromino) {
-        this.activeTetromino = tetromino;
+    @Override
+    public void spawnNewActiveTetromino() {
+        this.activeTetromino = new BoxTetro(this);
     }
 
     public void drawActivePiece() {

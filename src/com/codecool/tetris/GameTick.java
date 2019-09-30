@@ -1,6 +1,6 @@
 package com.codecool.tetris;
 
-public interface Gameplay {
+public interface GameTick {
 
     void step();
 
