@@ -1,11 +1,11 @@
 package com.codecool.tetromino;
 
-import com.codecool.tetris.TetrominoSetter;
+import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.paint.Color;
 
 public class STetro extends Tetromino {
 
-    public STetro(TetrominoSetter game) {
+    public STetro(TetrominoHandler game) {
         super(game);
 
         pieceOne.setColNum(4);

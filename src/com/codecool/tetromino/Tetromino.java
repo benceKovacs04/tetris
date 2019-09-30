@@ -1,12 +1,15 @@
 package com.codecool.tetromino;
 
 
-import com.codecool.tetris.TetrominoSetter;
+import com.codecool.tetris.TetrominoHandler;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.codecool.tetromino.Direction.LEFT;
+import static com.codecool.tetromino.Direction.RIGHT;
 
 public abstract class Tetromino {
 
@@ -15,17 +18,23 @@ public abstract class Tetromino {
     TetrominoPiece pieceThree = new TetrominoPiece();
     TetrominoPiece pieceFour = new TetrominoPiece();
 
-    private TetrominoSetter game;
+    Set<TetrominoPiece> pieces = new HashSet<>();
 
-    public Tetromino(TetrominoSetter game) {
+    private TetrominoHandler game;
+
+    public Tetromino(TetrominoHandler game) {
         this.game = game;
+        pieces.add(pieceOne);
+        pieces.add(pieceTwo);
+        pieces.add(pieceThree);
+        pieces.add(pieceFour);
     }
 
     public void move(Direction direction) {
         switch (direction) {
             case LEFT:
                 TetrominoPiece leftPiece = Collections.min(getPieces(), Comparator.comparing(p -> p.getColNum()));
-                if (leftPiece.getColNum() > 0) {
+                if (leftPiece.getColNum() > 0 && !checkSideCollision(LEFT, leftPiece)) {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setColNum(piece.getColNum() - 1);
                     }
@@ -33,7 +42,7 @@ public abstract class Tetromino {
                 break;
             case RIGHT:
                 TetrominoPiece rightPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getColNum()));
-                if (rightPiece.getColNum() < 9) {
+                if (rightPiece.getColNum() < 9 && !checkSideCollision(RIGHT, rightPiece)) {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setColNum(piece.getColNum() + 1);
                     }
@@ -51,16 +60,21 @@ public abstract class Tetromino {
         }
     }
 
+    public boolean checkSideCollision(Direction dir, TetrominoPiece edgePiece) {
+        int colToCheck = (dir == LEFT) ? edgePiece.getColNum() -1 : edgePiece.getColNum() + 1;
+
+        for (TetrominoPiece piece : getPieces()) {
+            if (piece.getColNum() == edgePiece.getColNum()) {
+                if (game.getNodeByRowColumnIndex(edgePiece.getRowNum(), colToCheck) != null);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public abstract void transform();
 
-    public Set<TetrominoPiece> getPieces() {
-        Set<TetrominoPiece> pieces = new HashSet<>();
-        pieces.add(pieceOne);
-        pieces.add(pieceTwo);
-        pieces.add(pieceThree);
-        pieces.add(pieceFour);
-
-        return pieces;
-    }
+    public Set<TetrominoPiece> getPieces() { return pieces; }
 
 }

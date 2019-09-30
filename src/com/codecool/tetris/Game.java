@@ -5,22 +5,20 @@ import com.codecool.tetromino.Direction;
 import com.codecool.tetromino.Tetromino;
 import com.codecool.tetromino.TetrominoPiece;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-import java.util.HashSet;
-import java.util.Set;
+import static com.codecool.tetromino.Direction.LEFT;
 
-public class Game extends GridPane implements GameTick, TetrominoSetter {
+public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
     private GameTimer gameTimer = new GameTimer();
 
     public Tetromino activeTetromino;
-
-    private Set<Tetromino> pieces = new HashSet<>();
 
     public Game() {
         this.setGridLinesVisible(true);
@@ -48,6 +46,20 @@ public class Game extends GridPane implements GameTick, TetrominoSetter {
     @Override
     public void spawnNewActiveTetromino() {
         this.activeTetromino = new BoxTetro(this);
+    }
+
+    @Override
+    public Node getNodeByRowColumnIndex(int row, int column) {
+        Node result = null;
+
+        for (Node node : getChildren()) {
+            if(getRowIndex(node) == row && getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
     }
 
     public void drawActivePiece() {
