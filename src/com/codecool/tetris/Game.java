@@ -5,6 +5,7 @@ import com.codecool.tetromino.Direction;
 import com.codecool.tetromino.Tetromino;
 import com.codecool.tetromino.TetrominoPiece;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -53,10 +54,10 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         Node result = null;
 
         for (Node node : getChildren()) {
-            if(getRowIndex(node) == row && getColumnIndex(node) == column) {
+            if(!(node instanceof Group) && getRowIndex(node) == row && getColumnIndex(node) == column) {
                 result = node;
                 break;
-            }
+           }
         }
 
         return result;
