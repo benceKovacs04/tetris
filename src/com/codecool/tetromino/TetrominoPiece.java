@@ -26,6 +26,8 @@ public class TetrominoPiece extends Rectangle {
 
     public TetrominoPiece() {
         super(24, 24);
-        this.setStroke(Color.BLACK);
+        this.setStroke(Color.GREY);
+        this.setArcHeight(10);
+        this.setArcWidth(10);
     }
 }
