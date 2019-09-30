@@ -1,3 +1,8 @@
 .myGridStyle Line {
     -fx-stroke: lightgrey;
 }
+
+.myGridStyle {
+    -fx-background-color: lightgrey;
+}
+

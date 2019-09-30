@@ -4,9 +4,8 @@ import com.codecool.tetromino.*;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import static com.codecool.tetromino.Direction.LEFT;
 
@@ -20,7 +19,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     public Tetromino activeTetromino;
 
     public Game() {
-        this.setGridLinesVisible(true);
+        //this.setGridLinesVisible(true);
         this.getStyleClass().add("myGridStyle");
         this.getStylesheets().add("assets/Main.css");
 
@@ -33,7 +32,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
             this.getRowConstraints().add(rowConst);
         }
 
-        this.setPadding(new Insets(30, 300,30,280));
+           // this.setPadding(new Insets(30, 300,30,280));
     }
 
     public void init() {
