@@ -15,6 +15,7 @@ public class Game extends GridPane implements Gameplay {
 
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
+    private GameTimer gameTimer = new GameTimer();
 
     private Tetromino activeTetromino;
 
@@ -38,7 +39,9 @@ public class Game extends GridPane implements Gameplay {
     }
 
     public void init() {
-        GameLoop gameloop = new GameLoop(this);
+        GameLoop gameLoop = new GameLoop(this);
+        gameTimer.setup(gameLoop::step);
+        gameTimer.play();
     }
 
     public void setActiveTetromino(Tetromino tetromino) {

@@ -18,6 +18,8 @@ public class Main extends Application {
         game.setActiveTetromino(tetro);
         game.drawActivePiece();
 
+        game.init();
+
         primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case A:

@@ -25,7 +25,7 @@ public abstract class Tetromino {
                 break;
             case DOWN:
                 for (TetrominoPiece piece : getPieces()) {
-                    piece.setColNum(piece.getRowNum() + 1);
+                    piece.setRowNum(piece.getRowNum() + 1);
                 }
         }
     }
