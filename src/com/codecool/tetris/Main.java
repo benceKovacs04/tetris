@@ -29,6 +29,9 @@ public class Main extends Application {
                     game.activeTetromino.move(Direction.RIGHT);
                     game.drawActivePiece();
                     break;
+                case W:
+                    game.activeTetromino.transform();
+                    game.drawActivePiece();
             }
         });
 

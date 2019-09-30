@@ -11,8 +11,8 @@ import static com.codecool.tetromino.Direction.LEFT;
 
 public class Game extends GridPane implements GameTick, TetrominoHandler {
 
-    private final int COLNUMBER = 10;
-    private final int ROWNUMBER = 22;
+    public static final int COLNUMBER = 10;
+    public static final int ROWNUMBER = 22;
     private GameTimer gameTimer = new GameTimer();
     private TetrominoFactory tetrominoFactory = new TetrominoFactory(this);
 

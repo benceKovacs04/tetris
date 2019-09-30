@@ -13,6 +13,9 @@ import static com.codecool.tetromino.Direction.RIGHT;
 
 public abstract class Tetromino {
 
+    final int COLNUMBER = 10;
+    final int ROWNUMBER = 22;
+
     TetrominoPiece pieceOne = new TetrominoPiece();
     TetrominoPiece pieceTwo = new TetrominoPiece();
     TetrominoPiece pieceThree = new TetrominoPiece();
