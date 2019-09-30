@@ -1,6 +1,8 @@
 package com.codecool.tetromino;
 
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,18 +16,27 @@ public abstract class Tetromino {
     public void move(Direction direction) {
         switch (direction) {
             case LEFT:
-                for (TetrominoPiece piece : getPieces()) {
-                    piece.setColNum(piece.getColNum() - 1);
+                TetrominoPiece leftPiece = Collections.min(getPieces(), Comparator.comparing(p -> p.getColNum()));
+                if (leftPiece.getColNum() > 0) {
+                    for (TetrominoPiece piece : getPieces()) {
+                        piece.setColNum(piece.getColNum() - 1);
+                    }
                 }
                 break;
             case RIGHT:
-                for (TetrominoPiece piece : getPieces()) {
-                    piece.setColNum(piece.getColNum() + 1);
+                TetrominoPiece rightPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getColNum()));
+                if (rightPiece.getColNum() < 9) {
+                    for (TetrominoPiece piece : getPieces()) {
+                        piece.setColNum(piece.getColNum() + 1);
+                    }
                 }
                 break;
             case DOWN:
-                for (TetrominoPiece piece : getPieces()) {
-                    piece.setRowNum(piece.getRowNum() + 1);
+                TetrominoPiece lowestPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
+                if (lowestPiece.getRowNum() < 21) {
+                    for (TetrominoPiece piece : getPieces()) {
+                        piece.setRowNum(piece.getRowNum() + 1);
+                    }
                 }
         }
     }
