@@ -15,6 +15,7 @@ public class Game extends GridPane {
     private final int COLNUMBER = 10;
     private final int ROWNUMBER = 22;
 
+    private Tetromino activeTetromino;
 
     private Set<Tetromino> pieces = new HashSet<>();
 
@@ -35,8 +36,12 @@ public class Game extends GridPane {
         this.setPadding(new Insets(30, 300,30,280));
     }
 
-    public void drawPiece(Tetromino tetromino) {
-        for (TetrominoPiece piece : tetromino.getPieces()) {
+    public void setActiveTetromino(Tetromino tetromino) {
+        this.activeTetromino = tetromino;
+    }
+
+    public void drawActivePiece() {
+        for (TetrominoPiece piece : activeTetromino.getPieces()) {
             this.getChildren().remove(piece);
             this.add(piece, piece.getColNum(), piece.getRowNum());
         }

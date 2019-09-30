@@ -6,8 +6,6 @@ import java.util.Set;
 
 public abstract class Tetromino {
 
-    boolean moving = true;
-
     TetrominoPiece pieceOne = new TetrominoPiece();
     TetrominoPiece pieceTwo = new TetrominoPiece();
     TetrominoPiece pieceThree = new TetrominoPiece();
@@ -25,14 +23,14 @@ public abstract class Tetromino {
                     piece.setColNum(piece.getColNum() + 1);
                 }
                 break;
+            case DOWN:
+                for (TetrominoPiece piece : getPieces()) {
+                    piece.setColNum(piece.getRowNum() + 1);
+                }
         }
     }
 
     public abstract void transform();
-
-    public void stopPiece() {
-        this.moving = false;
-    }
 
     public Set<TetrominoPiece> getPieces() {
         Set<TetrominoPiece> pieces = new HashSet<>();
