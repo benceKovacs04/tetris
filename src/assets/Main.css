@@ -1,8 +1,4 @@
-.myGridStyle Line {
-    -fx-stroke: lightgrey;
-}
-
-.myGridStyle {
+.game-grid-cell {
     -fx-background-color: lightgrey;
 }
 

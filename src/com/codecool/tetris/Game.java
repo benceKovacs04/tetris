@@ -32,7 +32,16 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
             this.getRowConstraints().add(rowConst);
         }
 
-           // this.setPadding(new Insets(30, 300,30,280));
+        for (int i = 0; i < COLNUMBER; i++) {
+            for (int j = 0; j < ROWNUMBER; j++) {
+                Pane pane = new Pane();
+                pane.getStyleClass().add("game-grid-cell");
+
+                add(pane, i, j);
+            }
+        }
+
+        this.setPadding(new Insets(30, 300,30,280));
     }
 
     public void init() {
@@ -51,7 +60,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         Node result = null;
 
         for (Node node : getChildren()) {
-            if(!(node instanceof Group) && getRowIndex(node) == row && getColumnIndex(node) == column) {
+            if(!(node instanceof Group) && !(node instanceof Pane) && getRowIndex(node) == row && getColumnIndex(node) == column) {
                 result = node;
                 break;
            }

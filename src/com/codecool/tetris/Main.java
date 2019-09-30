@@ -33,7 +33,7 @@ public class Main extends Application {
         });
 
 
-        primaryStage.setScene(new Scene(game, 250, 550));
+        primaryStage.setScene(new Scene(game, 800, 600));
         primaryStage.show();
 
     }
