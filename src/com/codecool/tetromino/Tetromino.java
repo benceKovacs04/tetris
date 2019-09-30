@@ -65,8 +65,9 @@ public abstract class Tetromino {
 
         for (TetrominoPiece piece : getPieces()) {
             if (piece.getColNum() == edgePiece.getColNum()) {
-                if (game.getNodeByRowColumnIndex(edgePiece.getRowNum(), colToCheck) != null);
-                return true;
+                if (game.getNodeByRowColumnIndex(piece.getRowNum(), colToCheck) != null) {
+                    return true;
+                }
             }
         }
 
