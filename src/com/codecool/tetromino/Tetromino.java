@@ -49,8 +49,8 @@ public abstract class Tetromino {
                 }
                 break;
             case DOWN:
-                TetrominoPiece lowestPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
-                if (lowestPiece.getRowNum() < 21) {
+                TetrominoPiece bottomPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
+                if (bottomPiece.getRowNum() < 21 && !checkBottomCollision(bottomPiece)) {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setRowNum(piece.getRowNum() + 1);
                     }
@@ -60,7 +60,7 @@ public abstract class Tetromino {
         }
     }
 
-    public boolean checkSideCollision(Direction dir, TetrominoPiece edgePiece) {
+    private boolean checkSideCollision(Direction dir, TetrominoPiece edgePiece) {
         int colToCheck = (dir == LEFT) ? edgePiece.getColNum() -1 : edgePiece.getColNum() + 1;
 
         for (TetrominoPiece piece : getPieces()) {
@@ -73,6 +73,22 @@ public abstract class Tetromino {
 
         return false;
     }
+
+    private boolean checkBottomCollision(TetrominoPiece bottomPiece) {
+        int rowToCheck = bottomPiece.getRowNum() + 1;
+
+        for (TetrominoPiece piece : getPieces()) {
+            if (piece.getRowNum() == bottomPiece.getRowNum()) {
+                if (game.getNodeByRowColumnIndex(rowToCheck, bottomPiece.getColNum()) != null) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
 
     public abstract void transform();
 
