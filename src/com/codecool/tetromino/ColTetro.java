@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 
 public class ColTetro extends Tetromino {
 
+    private int state = 1;
+
     public ColTetro(TetrominoHandler game) {
         super(game);
 
@@ -28,6 +30,31 @@ public class ColTetro extends Tetromino {
 
     @Override
     public void transform() {
-        //TODO: implement transform
+        switch (state) {
+            case 1:
+                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0) {
+                    pieceOne.setColNum(pieceOne.getColNum() + 2);
+                    pieceOne.setRowNum(pieceOne.getRowNum() + 2);
+
+                    pieceTwo.setColNum(pieceTwo.getColNum() + 1);
+                    pieceTwo.setRowNum(pieceTwo.getRowNum() + 1);
+
+                    pieceFour.setColNum(pieceFour.getColNum() - 1);
+                    pieceFour.setRowNum(pieceFour.getRowNum() - 1);
+                    state = 2;
+                }
+                break;
+            case 2:
+                pieceOne.setColNum(pieceOne.getColNum() - 2);
+                pieceOne.setRowNum(pieceOne.getRowNum() - 2);
+
+                pieceTwo.setColNum(pieceTwo.getColNum() - 1);
+                pieceTwo.setRowNum(pieceTwo.getRowNum() - 1);
+
+                pieceFour.setColNum(pieceFour.getColNum() + 1);
+                pieceFour.setRowNum(pieceFour.getRowNum() + 1);
+                state = 1;
+                break;
+        }
     }
 }

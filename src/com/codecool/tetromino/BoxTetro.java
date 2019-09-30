@@ -28,7 +28,6 @@ public class BoxTetro extends Tetromino {
 
     @Override
     public void transform() {
-        //TODO: do transformation
-        ;
+
     }
 }
