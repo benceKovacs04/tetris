@@ -3,6 +3,9 @@ package com.codecool.tetromino;
 import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.paint.Color;
 
+import java.util.Arrays;
+import java.util.Map;
+
 public class ColTetro extends Tetromino {
 
     private int state = 1;
@@ -28,11 +31,19 @@ public class ColTetro extends Tetromino {
         pieceFour.setFill(Color.AQUA);
     }
 
+
     @Override
     public void transform() {
+
         switch (state) {
             case 1:
-                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0) {
+                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 &&
+                        checkForValidTransform(Map.of(
+                    "firstPiece", Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum() + 2),
+                    "secondPiece", Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
+                    "fourthPiece", Arrays.asList(pieceFour.getRowNum() - 1, pieceFour.getColNum() - 1)
+            ))) {
+
                     pieceOne.setColNum(pieceOne.getColNum() + 2);
                     pieceOne.setRowNum(pieceOne.getRowNum() + 2);
 
@@ -45,15 +56,21 @@ public class ColTetro extends Tetromino {
                 }
                 break;
             case 2:
-                pieceOne.setColNum(pieceOne.getColNum() - 2);
-                pieceOne.setRowNum(pieceOne.getRowNum() - 2);
+                if (checkForValidTransform(Map.of(
+                    "firstPiece", Arrays.asList(pieceOne.getRowNum() - 2, pieceOne.getColNum() - 2),
+                    "secondPiece", Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() - 1),
+                    "fourthPiece", Arrays.asList(pieceFour.getRowNum() + 1, pieceFour.getColNum() + 1)
+            ))) {
+                    pieceOne.setColNum(pieceOne.getColNum() - 2);
+                    pieceOne.setRowNum(pieceOne.getRowNum() - 2);
 
-                pieceTwo.setColNum(pieceTwo.getColNum() - 1);
-                pieceTwo.setRowNum(pieceTwo.getRowNum() - 1);
+                    pieceTwo.setColNum(pieceTwo.getColNum() - 1);
+                    pieceTwo.setRowNum(pieceTwo.getRowNum() - 1);
 
-                pieceFour.setColNum(pieceFour.getColNum() + 1);
-                pieceFour.setRowNum(pieceFour.getRowNum() + 1);
-                state = 1;
+                    pieceFour.setColNum(pieceFour.getColNum() + 1);
+                    pieceFour.setRowNum(pieceFour.getRowNum() + 1);
+                    state = 1;
+                }
                 break;
         }
     }

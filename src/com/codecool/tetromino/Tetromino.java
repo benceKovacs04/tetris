@@ -2,11 +2,11 @@ package com.codecool.tetromino;
 
 
 import com.codecool.tetris.TetrominoHandler;
+import javafx.scene.Node;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 import static com.codecool.tetromino.Direction.LEFT;
 import static com.codecool.tetromino.Direction.RIGHT;
@@ -23,7 +23,7 @@ public abstract class Tetromino {
 
     Set<TetrominoPiece> pieces = new HashSet<>();
 
-    private TetrominoHandler game;
+    TetrominoHandler game;
 
     public Tetromino(TetrominoHandler game) {
         this.game = game;
@@ -94,6 +94,24 @@ public abstract class Tetromino {
 
 
     public abstract void transform();
+
+    public boolean checkForValidTransform(Map<String, List<Integer>> nextPositions) {
+
+        Set<Node> futurePositions = new HashSet<>();
+
+        for (List<Integer> coordinates : nextPositions.values()) {
+            futurePositions.add(game.getNodeByRowColumnIndex(coordinates.get(0), coordinates.get(1)));
+        }
+
+        for (Node node : futurePositions) {
+            if (node != null) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
 
     public Set<TetrominoPiece> getPieces() { return pieces; }
 

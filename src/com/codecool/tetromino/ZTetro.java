@@ -3,6 +3,8 @@ package com.codecool.tetromino;
 import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.paint.Color;
 
+import java.util.Map;
+
 public class ZTetro extends Tetromino {
 
     public ZTetro(TetrominoHandler game) {

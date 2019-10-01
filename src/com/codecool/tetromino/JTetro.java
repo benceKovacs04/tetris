@@ -3,6 +3,8 @@ package com.codecool.tetromino;
 import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.paint.Color;
 
+import java.util.Map;
+
 public class JTetro extends Tetromino {
 
     public JTetro(TetrominoHandler game) {
@@ -30,4 +32,5 @@ public class JTetro extends Tetromino {
     public void transform() {
         //TODO: implement transformation
     }
+
 }
