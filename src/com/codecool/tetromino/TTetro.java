@@ -41,7 +41,7 @@ public class TTetro extends CenterPieceTetromino {
     public void transform() {
         switch (state) {
             case 1:
-                if (checkForValidTransform(Map.of("thirdPiece", Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() -1)))
+                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() -1)))
                         && middlePieceInBounds()) {
                     transformFirstTwoPiece();
                     pieceThree.setRowNum(pieceThree.getRowNum() + 1);
@@ -50,7 +50,7 @@ public class TTetro extends CenterPieceTetromino {
                 }
                 break;
             case 2:
-                if (checkForValidTransform(Map.of("thirdPiece", Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() - 1)))
+                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() - 1)))
                         && middlePieceInBounds()) {
                     transformFirstTwoPiece();
                     pieceThree.setRowNum(pieceThree.getRowNum() - 1);
@@ -59,7 +59,7 @@ public class TTetro extends CenterPieceTetromino {
                 }
                 break;
             case 3:
-                if (checkForValidTransform(Map.of("thirdPiece", Arrays.asList(pieceThree.getRowNum() - 1 , pieceThree.getColNum() + 1)))
+                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1 , pieceThree.getColNum() + 1)))
                         && middlePieceInBounds()
                 ) {
                     transformFirstTwoPiece();
@@ -69,7 +69,7 @@ public class TTetro extends CenterPieceTetromino {
                 }
                 break;
             case 4:
-                if (checkForValidTransform(Map.of("thirdPiece", Arrays.asList(pieceThree.getRowNum() + 1 , pieceThree.getColNum() + 1)))
+                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1 , pieceThree.getColNum() + 1)))
                         && middlePieceInBounds()) {
                     transformFirstTwoPiece();
                     pieceThree.setRowNum(pieceThree.getRowNum() + 1);
