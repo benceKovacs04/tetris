@@ -1,13 +1,17 @@
 package com.codecool.tetris;
 
 import com.codecool.tetromino.*;
+
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
-import static com.codecool.tetromino.Direction.LEFT;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 
 public class Game extends GridPane implements GameTick, TetrominoHandler {
 
@@ -19,7 +23,6 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     public Tetromino activeTetromino;
 
     public Game() {
-        //this.setGridLinesVisible(true);
         this.getStyleClass().add("myGridStyle");
         this.getStylesheets().add("assets/Main.css");
 
@@ -73,6 +76,48 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         for (TetrominoPiece piece : activeTetromino.getPieces()) {
             this.getChildren().remove(piece);
             this.add(piece, piece.getColNum(), piece.getRowNum());
+        }
+    }
+
+    @Override
+    public void handleFullRows() {
+        List<Node> row = new ArrayList<>();
+        for (int i = ROWNUMBER -1; i >= 0; i--) {
+            for (int y = 0; y < COLNUMBER; y++) {
+                row.add(getNodeByRowColumnIndex(i, y));
+            }
+            deleteRowIfFull(row, i);
+            row.clear();
+        }
+    }
+
+    private void deleteRowIfFull(List<Node> row, int currentRow) {
+        for (Node node : row) {
+            if (node == null) {
+                return;
+            }
+        }
+
+
+        for (Node node : row) {
+            getChildren().remove(node);
+        }
+
+        movePiecesDown(currentRow);
+    }
+
+    private void movePiecesDown(int fullRowNum) {
+        //int lowestActivePieceRowNum = activeTetromino.getLowestPieceRowNum();
+        for (int i = fullRowNum - 1; i > 0; i--) {
+            for (int y = 0; y < COLNUMBER; y++) {
+                Node piece = getNodeByRowColumnIndex(i, y);
+                if (piece != null) {
+                    int colIndex = getColumnIndex(piece);
+                    int rowIndex = getRowIndex(piece);
+                    getChildren().remove(piece);
+                    add(piece, colIndex, rowIndex + 1);
+                }
+            }
         }
     }
 

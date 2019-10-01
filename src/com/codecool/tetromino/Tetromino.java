@@ -60,6 +60,7 @@ public abstract class Tetromino {
                         piece.setRowNum(piece.getRowNum() + 1);
                     }
                 } else {
+                    game.handleFullRows();
                     game.spawnNewActiveTetromino();
                 }
         }
@@ -117,4 +118,9 @@ public abstract class Tetromino {
     public abstract void transform();
 
     public Set<TetrominoPiece> getPieces() { return pieces; }
+
+    public int getLowestPieceRowNum() {
+       TetrominoPiece lowestPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
+       return lowestPiece.getRowNum();
+    }
 }
