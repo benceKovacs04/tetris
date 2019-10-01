@@ -4,6 +4,7 @@ import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.paint.Color;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class ColTetro extends Tetromino {
@@ -31,18 +32,33 @@ public class ColTetro extends Tetromino {
         pieceFour.setFill(Color.AQUA);
     }
 
+    private boolean stateOneValidMove() {
+        Map<String, List<Integer>> futurePositions = Map.of(
+                "firstPiece", Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum() + 2),
+                "secondPiece", Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
+                "fourthPiece", Arrays.asList(pieceFour.getRowNum() - 1, pieceFour.getColNum() - 1)
+        );
+
+        return checkForValidTransform(futurePositions);
+    }
+
+    private boolean stateTwoValidMove() {
+        Map<String, List<Integer>> futurePositions = Map.of(
+                "firstPiece", Arrays.asList(pieceOne.getRowNum() - 2, pieceOne.getColNum() - 2),
+                "secondPiece", Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() - 1),
+                "fourthPiece", Arrays.asList(pieceFour.getRowNum() + 1, pieceFour.getColNum() + 1)
+        );
+
+        return checkForValidTransform(futurePositions);
+    }
+
 
     @Override
     public void transform() {
 
         switch (state) {
             case 1:
-                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 &&
-                        checkForValidTransform(Map.of(
-                    "firstPiece", Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum() + 2),
-                    "secondPiece", Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
-                    "fourthPiece", Arrays.asList(pieceFour.getRowNum() - 1, pieceFour.getColNum() - 1)
-            ))) {
+                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 && stateOneValidMove()) {
 
                     pieceOne.setColNum(pieceOne.getColNum() + 2);
                     pieceOne.setRowNum(pieceOne.getRowNum() + 2);
@@ -56,11 +72,7 @@ public class ColTetro extends Tetromino {
                 }
                 break;
             case 2:
-                if (checkForValidTransform(Map.of(
-                    "firstPiece", Arrays.asList(pieceOne.getRowNum() - 2, pieceOne.getColNum() - 2),
-                    "secondPiece", Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() - 1),
-                    "fourthPiece", Arrays.asList(pieceFour.getRowNum() + 1, pieceFour.getColNum() + 1)
-            ))) {
+                if (stateTwoValidMove()) {
                     pieceOne.setColNum(pieceOne.getColNum() - 2);
                     pieceOne.setRowNum(pieceOne.getRowNum() - 2);
 
