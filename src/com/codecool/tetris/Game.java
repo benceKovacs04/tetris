@@ -8,8 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -108,7 +106,6 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     private void movePiecesDown(int fullRowNum) {
-        //int lowestActivePieceRowNum = activeTetromino.getLowestPieceRowNum();
         for (int i = fullRowNum - 1; i > 0; i--) {
             for (int y = 0; y < COLNUMBER; y++) {
                 Node piece = getNodeByRowColumnIndex(i, y);
