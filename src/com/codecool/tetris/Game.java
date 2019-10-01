@@ -104,6 +104,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         }
 
         movePiecesDown(currentRow);
+        handleFullRows();
     }
 
     private void movePiecesDown(int fullRowNum) {
