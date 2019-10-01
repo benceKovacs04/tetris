@@ -20,26 +20,19 @@ public class TetrominoFactory {
         rndNum = rnd.nextInt(7);
         switch(rndNum) {
             case 0:
-                //return new BoxTetro(game);
-                return new ColTetro(game);
+                return new BoxTetro(game);
             case 1:
-                //return new ColTetro(game);
                 return new ColTetro(game);
             case 2:
-                //return new JTetro(game);
-                return new ColTetro(game);
+                return new JTetro(game);
             case 3:
-                //eturn new LTetro(game);
-                return new ColTetro(game);
+                return new LTetro(game);
             case 4:
-                //return new STetro(game);
-                return new TTetro(game);
+                return new STetro(game);
             case 5:
-                //return new TTetro(game);
                 return new TTetro(game);
             case 6:
-                //return new ZTetro(game);
-                return new TTetro(game);
+                return new ZTetro(game);
         }
         return null;
     }
