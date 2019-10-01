@@ -39,7 +39,7 @@ public abstract class Tetromino {
         switch (direction) {
             case LEFT:
                 TetrominoPiece leftPiece = Collections.min(getPieces(), Comparator.comparing(p -> p.getColNum()));
-                if (leftPiece.getColNum() > 0 && !checkSideCollision(LEFT, leftPiece)) {
+                if (leftPiece.getColNum() > 0 && checkSideCollision(LEFT)) {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setColNum(piece.getColNum() - 1);
                     }
@@ -47,7 +47,7 @@ public abstract class Tetromino {
                 break;
             case RIGHT:
                 TetrominoPiece rightPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getColNum()));
-                if (rightPiece.getColNum() < 9 && !checkSideCollision(RIGHT, rightPiece)) {
+                if (rightPiece.getColNum() < 9 && checkSideCollision(RIGHT)) {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setColNum(piece.getColNum() + 1);
                     }
@@ -55,7 +55,7 @@ public abstract class Tetromino {
                 break;
             case DOWN:
                 TetrominoPiece bottomPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
-                if (bottomPiece.getRowNum() < 21 && !checkBottomCollision(bottomPiece)) {
+                if (bottomPiece.getRowNum() < 21 && checkBottomCollision()) {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setRowNum(piece.getRowNum() + 1);
                     }
@@ -65,32 +65,31 @@ public abstract class Tetromino {
         }
     }
 
-    private boolean checkSideCollision(Direction dir, TetrominoPiece edgePiece) {
-        int colToCheck = (dir == LEFT) ? edgePiece.getColNum() -1 : edgePiece.getColNum() + 1;
-
-        for (TetrominoPiece piece : getPieces()) {
-            if (piece.getColNum() == edgePiece.getColNum()) {
-                if (game.getNodeByRowColumnIndex(piece.getRowNum(), colToCheck) != null) {
-                    return true;
+    private boolean checkSideCollision(Direction dir) {
+        Map<TetrominoPiece, List<Integer>> nextPos = new HashMap<>();
+        switch (dir) {
+            case LEFT:
+                for (TetrominoPiece piece : pieces) {
+                    nextPos.put(piece, Arrays.asList(piece.getRowNum(), piece.getColNum() - 1));
                 }
-            }
+                break;
+            case RIGHT:
+                for (TetrominoPiece piece : pieces) {
+                    nextPos.put(piece, Arrays.asList(piece.getRowNum(), piece.getColNum() + 1));
+                }
+                break;
         }
-
-        return false;
+        return checkForValidTransformation(nextPos);
     }
 
-    private boolean checkBottomCollision(TetrominoPiece bottomPiece) {
-        int rowToCheck = bottomPiece.getRowNum() + 1;
+    private boolean checkBottomCollision() {
+        Map<TetrominoPiece, List<Integer>> nextPos = new HashMap<>();
 
-        for (TetrominoPiece piece : getPieces()) {
-            if (piece.getRowNum() == bottomPiece.getRowNum()) {
-                if (game.getNodeByRowColumnIndex(rowToCheck, piece.getColNum()) != null) {
-                    return true;
-                }
-            }
+        for (TetrominoPiece piece : pieces) {
+            nextPos.put(piece, Arrays.asList(piece.getRowNum() + 1, piece.getColNum()));
         }
 
-        return false;
+        return checkForValidTransformation(nextPos);
     }
 
     protected boolean checkForValidTransformation(Map<TetrominoPiece, List<Integer>> nextPositions) {
