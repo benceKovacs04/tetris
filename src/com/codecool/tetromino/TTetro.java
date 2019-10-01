@@ -6,9 +6,7 @@ import javafx.scene.paint.Color;
 import java.util.Arrays;
 import java.util.Map;
 
-public class TTetro extends Tetromino {
-
-    private int state = 1;
+public class TTetro extends CenterPieceTetromino {
 
     public TTetro(TetrominoHandler game) {
         super(game);
@@ -29,11 +27,6 @@ public class TTetro extends Tetromino {
         pieceTwo.setFill(Color.PURPLE);
         pieceThree.setFill(Color.PURPLE);
         pieceFour.setFill(Color.PURPLE);
-    }
-
-    private boolean middlePieceInBounds() {
-        return pieceFour.getRowNum() < ROWNUMBER - 1 && pieceFour.getRowNum() > 0 &&
-                pieceFour.getColNum() <= COLNUMBER - 2 && pieceFour.getColNum() > 0;
     }
 
     private void transformFirstTwoPiece() {

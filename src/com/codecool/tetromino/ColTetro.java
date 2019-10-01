@@ -9,8 +9,6 @@ import java.util.Map;
 
 public class ColTetro extends Tetromino {
 
-    private int state = 1;
-
     public ColTetro(TetrominoHandler game) {
         super(game);
 
@@ -32,7 +30,7 @@ public class ColTetro extends Tetromino {
         pieceFour.setFill(Color.AQUA);
     }
 
-    private boolean stateOneValidMove() {
+    private boolean stateOneValidTransform() {
         Map<String, List<Integer>> futurePositions = Map.of(
                 "firstPiece", Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum() + 2),
                 "secondPiece", Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
@@ -58,7 +56,7 @@ public class ColTetro extends Tetromino {
 
         switch (state) {
             case 1:
-                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 && stateOneValidMove()) {
+                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 && stateOneValidTransform()) {
 
                     pieceOne.setColNum(pieceOne.getColNum() + 2);
                     pieceOne.setRowNum(pieceOne.getRowNum() + 2);

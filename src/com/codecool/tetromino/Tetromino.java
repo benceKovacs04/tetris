@@ -13,6 +13,8 @@ import static com.codecool.tetromino.Direction.RIGHT;
 
 public abstract class Tetromino {
 
+    protected int state = 1;
+
     final int COLNUMBER = 10;
     final int ROWNUMBER = 22;
 
@@ -91,10 +93,6 @@ public abstract class Tetromino {
         return false;
     }
 
-
-
-    public abstract void transform();
-
     public boolean checkForValidTransform(Map<String, List<Integer>> nextPositions) {
 
         Set<Node> futurePositions = new HashSet<>();
@@ -114,5 +112,7 @@ public abstract class Tetromino {
     }
 
     public Set<TetrominoPiece> getPieces() { return pieces; }
+
+    public abstract void transform();
 
 }
