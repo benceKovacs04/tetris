@@ -31,7 +31,7 @@ public class TTetro extends CenterPieceTetromino {
         pieceFour.setFill(Color.PURPLE);
     }
 
-    private Map<TetrominoPiece, List<Integer>> getNextBaseState() {
+    private Map<TetrominoPiece, List<Integer>> getNextStateTransformationMap() {
         Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceTwo.getRowNum(), pieceTwo.getColNum()),
                 pieceTwo, Arrays.asList(pieceThree.getRowNum(), pieceThree.getColNum())));
@@ -41,7 +41,7 @@ public class TTetro extends CenterPieceTetromino {
 
     @Override
     public void transform() {
-        Map<TetrominoPiece, List<Integer>> nextState = getNextBaseState();
+        Map<TetrominoPiece, List<Integer>> nextState = getNextStateTransformationMap();
         switch (state) {
             case 1:
                 nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() - 1));
