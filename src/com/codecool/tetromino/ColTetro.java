@@ -52,14 +52,14 @@ public class ColTetro extends Tetromino {
         switch (state) {
             case 1:
                 nextState = getStateOneTransformationMap();
-                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 && checkForValidTransform(nextState)) {
+                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 && checkForValidTransformation(nextState)) {
                     doTransformation(nextState);
                     state = 2;
                 }
                 break;
             case 2:
                 nextState = getStateTwoTransformationMap();
-                if (checkForValidTransform(nextState)) {
+                if (checkForValidTransformation(nextState)) {
                     doTransformation(nextState);
                     state = 1;
                 }

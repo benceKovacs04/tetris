@@ -21,24 +21,24 @@ public class TetrominoFactory {
         switch(rndNum) {
             case 0:
                 //return new BoxTetro(game);
-                return new ColTetro(game);
+                return new TTetro(game);
             case 1:
-                return new ColTetro(game);
+                return new TTetro(game);
             case 2:
                 //return new JTetro(game);
-                return new ColTetro(game);
+                return new TTetro(game);
             case 3:
                 //return new LTetro(game);
-                return new ColTetro(game);
+                return new TTetro(game);
             case 4:
                 //return new STetro(game);
-                return new ColTetro(game);
+                return new TTetro(game);
             case 5:
                 //return new TTetro(game);
-                return new ColTetro(game);
+                return new TTetro(game);
             case 6:
                 //return new ZTetro(game);
-                return new ColTetro(game);
+                return new TTetro(game);
         }
         return null;
     }

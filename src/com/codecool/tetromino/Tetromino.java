@@ -93,7 +93,7 @@ public abstract class Tetromino {
         return false;
     }
 
-    protected boolean checkForValidTransform(Map<TetrominoPiece, List<Integer>> nextPositions) {
+    protected boolean checkForValidTransformation(Map<TetrominoPiece, List<Integer>> nextPositions) {
 
         Set<Node> futurePositions = new HashSet<>();
 
@@ -101,7 +101,7 @@ public abstract class Tetromino {
             futurePositions.add(game.getNodeByRowColumnIndex(coordinates.get(0), coordinates.get(1)));
         }
         for (Node node : futurePositions) {
-            if (node != null) {
+            if (node != null && !getPieces().contains(node)) {
                 return false;
             }
         }

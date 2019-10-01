@@ -4,6 +4,8 @@ import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.paint.Color;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TTetro extends CenterPieceTetromino {
@@ -29,51 +31,43 @@ public class TTetro extends CenterPieceTetromino {
         pieceFour.setFill(Color.PURPLE);
     }
 
-    private void transformFirstTwoPiece() {
-        pieceOne.setColNum(pieceTwo.getColNum());
-        pieceOne.setRowNum(pieceTwo.getRowNum());
+    private Map<TetrominoPiece, List<Integer>> getNextBaseState() {
+        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+                pieceOne, Arrays.asList(pieceTwo.getRowNum(), pieceTwo.getColNum()),
+                pieceTwo, Arrays.asList(pieceThree.getRowNum(), pieceThree.getColNum())));
 
-        pieceTwo.setColNum(pieceThree.getColNum());
-        pieceTwo.setRowNum(pieceThree.getRowNum());
+        return nextState;
     }
 
     @Override
     public void transform() {
+        Map<TetrominoPiece, List<Integer>> nextState = getNextBaseState();
         switch (state) {
             case 1:
-                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() -1)))
-                        && middlePieceInBounds()) {
-                    transformFirstTwoPiece();
-                    pieceThree.setRowNum(pieceThree.getRowNum() + 1);
-                    pieceThree.setColNum(pieceThree.getColNum() - 1);
+                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() - 1));
+                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
+                    doTransformation(nextState);
                     state = 2;
                 }
                 break;
             case 2:
-                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() - 1)))
-                        && middlePieceInBounds()) {
-                    transformFirstTwoPiece();
-                    pieceThree.setRowNum(pieceThree.getRowNum() - 1);
-                    pieceThree.setColNum(pieceThree.getColNum() - 1);
+                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() - 1));
+                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
+                    doTransformation(nextState);
                     state = 3;
                 }
                 break;
             case 3:
-                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1 , pieceThree.getColNum() + 1)))
-                        && middlePieceInBounds()
-                ) {
-                    transformFirstTwoPiece();
-                    pieceThree.setRowNum(pieceThree.getRowNum() - 1);
-                    pieceThree.setColNum(pieceThree.getColNum() + 1);
+                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() + 1));
+                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
+                    doTransformation(nextState);
                     state = 4;
                 }
                 break;
             case 4:
-                if (checkForValidTransform(Map.of(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1 , pieceThree.getColNum() + 1)))
-                        && middlePieceInBounds()) {
-                    transformFirstTwoPiece();
-                    pieceThree.setRowNum(pieceThree.getRowNum() + 1);
-                    pieceThree.setColNum(pieceThree.getColNum() + 1);
+                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() + 1));
+                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
+                    doTransformation(nextState);
                     state = 1;
                 }
                 break;
