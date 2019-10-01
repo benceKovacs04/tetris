@@ -31,7 +31,8 @@ public class JTetro extends CenterPieceTetromino {
         pieceFour.setFill(Color.BLUE);
     }
 
-    private Map<TetrominoPiece, List<Integer>> getStateOneTransformationMap() {
+    @Override
+    protected Map<TetrominoPiece, List<Integer>> getStateOneTransformationMap() {
         Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceOne.getRowNum(), pieceOne.getColNum() + 2),
                 pieceTwo, Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() + 1),
@@ -41,7 +42,8 @@ public class JTetro extends CenterPieceTetromino {
         return nextState;
     }
 
-    private Map<TetrominoPiece, List<Integer>> getStateTwoTransformationMap() {
+    @Override
+    protected Map<TetrominoPiece, List<Integer>> getStateTwoTransformationMap() {
         Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum()),
                 pieceTwo, Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
@@ -51,7 +53,8 @@ public class JTetro extends CenterPieceTetromino {
         return nextState;
     }
 
-    private Map<TetrominoPiece, List<Integer>> getStateThreeTransformationMap() {
+    @Override
+    protected Map<TetrominoPiece, List<Integer>> getStateThreeTransformationMap() {
         Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceOne.getRowNum(), pieceOne.getColNum() - 2),
                 pieceTwo, Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() - 1),
@@ -61,7 +64,8 @@ public class JTetro extends CenterPieceTetromino {
         return nextState;
     }
 
-    private Map<TetrominoPiece, List<Integer>> getStateFourTransformationMap() {
+    @Override
+    protected Map<TetrominoPiece, List<Integer>> getStateFourTransformationMap() {
         Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceOne.getRowNum() -2, pieceOne.getColNum()),
                 pieceTwo, Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() - 1),
@@ -69,41 +73,6 @@ public class JTetro extends CenterPieceTetromino {
         ));
 
         return nextState;
-    }
-
-    @Override
-    public void transform() {
-        Map<TetrominoPiece, List<Integer>> nextState;
-        switch (state) {
-            case 1:
-                nextState = getStateOneTransformationMap();
-                if(middlePieceInBounds() && checkForValidTransformation(nextState)) {
-                    doTransformation(nextState);
-                    state = 2;
-                }
-                break;
-            case 2:
-                nextState = getStateTwoTransformationMap();
-                if(middlePieceInBounds() && checkForValidTransformation(nextState)) {
-                    doTransformation(nextState);
-                    state = 3;
-                }
-                break;
-            case 3:
-                nextState = getStateThreeTransformationMap();
-                if(middlePieceInBounds() && checkForValidTransformation(nextState)) {
-                    doTransformation(nextState);
-                    state = 4;
-                }
-                break;
-            case 4:
-                nextState = getStateFourTransformationMap();
-                if(middlePieceInBounds() && checkForValidTransformation(nextState)) {
-                    doTransformation(nextState);
-                    state = 1;
-                }
-                break;
-        }
     }
 
 }

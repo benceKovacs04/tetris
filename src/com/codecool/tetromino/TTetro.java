@@ -31,47 +31,48 @@ public class TTetro extends CenterPieceTetromino {
         pieceFour.setFill(Color.PURPLE);
     }
 
-    private Map<TetrominoPiece, List<Integer>> getNextStateTransformationMap() {
+    @Override
+    protected Map<TetrominoPiece, List<Integer>> getStateOneTransformationMap() {
         Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceTwo.getRowNum(), pieceTwo.getColNum()),
-                pieceTwo, Arrays.asList(pieceThree.getRowNum(), pieceThree.getColNum())));
+                pieceTwo, Arrays.asList(pieceThree.getRowNum(), pieceThree.getColNum()),
+                pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() - 1)
+        ));
 
         return nextState;
     }
 
     @Override
-    public void transform() {
-        Map<TetrominoPiece, List<Integer>> nextState = getNextStateTransformationMap();
-        switch (state) {
-            case 1:
-                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() - 1));
-                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
-                    doTransformation(nextState);
-                    state = 2;
-                }
-                break;
-            case 2:
-                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() - 1));
-                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
-                    doTransformation(nextState);
-                    state = 3;
-                }
-                break;
-            case 3:
-                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() + 1));
-                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
-                    doTransformation(nextState);
-                    state = 4;
-                }
-                break;
-            case 4:
-                nextState.put(pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() + 1));
-                if (checkForValidTransformation(nextState) && middlePieceInBounds()) {
-                    doTransformation(nextState);
-                    state = 1;
-                }
-                break;
-        }
+    protected Map<TetrominoPiece, List<Integer>> getStateTwoTransformationMap() {
+        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+                pieceOne, Arrays.asList(pieceTwo.getRowNum(), pieceTwo.getColNum()),
+                pieceTwo, Arrays.asList(pieceThree.getRowNum(), pieceThree.getColNum()),
+                pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() - 1)
+        ));
+
+        return nextState;
+    }
+
+    @Override
+    protected Map<TetrominoPiece, List<Integer>> getStateThreeTransformationMap() {
+        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+                pieceOne, Arrays.asList(pieceTwo.getRowNum(), pieceTwo.getColNum()),
+                pieceTwo, Arrays.asList(pieceThree.getRowNum(), pieceThree.getColNum()),
+                pieceThree, Arrays.asList(pieceThree.getRowNum() - 1, pieceThree.getColNum() + 1)
+        ));
+
+        return nextState;
+    }
+
+    @Override
+    protected Map<TetrominoPiece, List<Integer>> getStateFourTransformationMap() {
+        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+                pieceOne, Arrays.asList(pieceTwo.getRowNum(), pieceTwo.getColNum()),
+                pieceTwo, Arrays.asList(pieceThree.getRowNum(), pieceThree.getColNum()),
+                pieceThree, Arrays.asList(pieceThree.getRowNum() + 1, pieceThree.getColNum() + 1)
+        ));
+
+        return nextState;
     }
 }
 
