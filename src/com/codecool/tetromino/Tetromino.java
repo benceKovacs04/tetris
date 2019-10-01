@@ -93,26 +93,29 @@ public abstract class Tetromino {
         return false;
     }
 
-    public boolean checkForValidTransform(Map<String, List<Integer>> nextPositions) {
+    protected boolean checkForValidTransform(Map<TetrominoPiece, List<Integer>> nextPositions) {
 
         Set<Node> futurePositions = new HashSet<>();
 
         for (List<Integer> coordinates : nextPositions.values()) {
             futurePositions.add(game.getNodeByRowColumnIndex(coordinates.get(0), coordinates.get(1)));
         }
-
         for (Node node : futurePositions) {
             if (node != null) {
                 return false;
             }
         }
-
         return true;
-
     }
 
-    public Set<TetrominoPiece> getPieces() { return pieces; }
+    protected void doTransformation(Map<TetrominoPiece, List<Integer>> nextPositions) {
+        for (Map.Entry<TetrominoPiece, List<Integer>> entry : nextPositions.entrySet()) {
+            entry.getKey().setRowNum(entry.getValue().get(0));
+            entry.getKey().setColNum(entry.getValue().get(1));
+        }
+    }
 
     public abstract void transform();
 
+    public Set<TetrominoPiece> getPieces() { return pieces; }
 }

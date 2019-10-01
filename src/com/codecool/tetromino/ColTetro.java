@@ -3,9 +3,7 @@ package com.codecool.tetromino;
 import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.paint.Color;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ColTetro extends Tetromino {
 
@@ -30,55 +28,39 @@ public class ColTetro extends Tetromino {
         pieceFour.setFill(Color.AQUA);
     }
 
-    private boolean stateOneValidTransform() {
-        Map<String, List<Integer>> futurePositions = Map.of(
-                "firstPiece", Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum() + 2),
-                "secondPiece", Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
-                "fourthPiece", Arrays.asList(pieceFour.getRowNum() - 1, pieceFour.getColNum() - 1)
-        );
+    private Map<TetrominoPiece, List<Integer>> getStateOneTransformationMap() {
+        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+                pieceOne, Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum() + 2),
+                pieceTwo, Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
+                pieceFour, Arrays.asList(pieceFour.getRowNum() - 1, pieceFour.getColNum() - 1)));
 
-        return checkForValidTransform(futurePositions);
+        return nextState;
     }
 
-    private boolean stateTwoValidMove() {
-        Map<String, List<Integer>> futurePositions = Map.of(
-                "firstPiece", Arrays.asList(pieceOne.getRowNum() - 2, pieceOne.getColNum() - 2),
-                "secondPiece", Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() - 1),
-                "fourthPiece", Arrays.asList(pieceFour.getRowNum() + 1, pieceFour.getColNum() + 1)
-        );
+    private Map<TetrominoPiece, List<Integer>> getStateTwoTransformationMap() {
+        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+                pieceOne, Arrays.asList(pieceOne.getRowNum() - 2, pieceOne.getColNum() - 2),
+                pieceTwo, Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() - 1),
+                pieceFour, Arrays.asList(pieceFour.getRowNum() + 1, pieceFour.getColNum() + 1)));
 
-        return checkForValidTransform(futurePositions);
+        return nextState;
     }
-
 
     @Override
     public void transform() {
-
+        Map<TetrominoPiece, List<Integer>> nextState;
         switch (state) {
             case 1:
-                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 && stateOneValidTransform()) {
-
-                    pieceOne.setColNum(pieceOne.getColNum() + 2);
-                    pieceOne.setRowNum(pieceOne.getRowNum() + 2);
-
-                    pieceTwo.setColNum(pieceTwo.getColNum() + 1);
-                    pieceTwo.setRowNum(pieceTwo.getRowNum() + 1);
-
-                    pieceFour.setColNum(pieceFour.getColNum() - 1);
-                    pieceFour.setRowNum(pieceFour.getRowNum() - 1);
+                nextState = getStateOneTransformationMap();
+                if (pieceOne.getColNum() < COLNUMBER - 2 && pieceFour.getColNum() > 0 && checkForValidTransform(nextState)) {
+                    doTransformation(nextState);
                     state = 2;
                 }
                 break;
             case 2:
-                if (stateTwoValidMove()) {
-                    pieceOne.setColNum(pieceOne.getColNum() - 2);
-                    pieceOne.setRowNum(pieceOne.getRowNum() - 2);
-
-                    pieceTwo.setColNum(pieceTwo.getColNum() - 1);
-                    pieceTwo.setRowNum(pieceTwo.getRowNum() - 1);
-
-                    pieceFour.setColNum(pieceFour.getColNum() + 1);
-                    pieceFour.setRowNum(pieceFour.getRowNum() + 1);
+                nextState = getStateTwoTransformationMap();
+                if (checkForValidTransform(nextState)) {
+                    doTransformation(nextState);
                     state = 1;
                 }
                 break;
