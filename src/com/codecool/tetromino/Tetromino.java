@@ -36,6 +36,15 @@ public abstract class Tetromino {
     }
 
     public void move(Direction direction) {
+        TetrominoPiece bottomPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
+        if(direction == Direction.BOTTOM) {
+            while(checkBottomCollision() && bottomPiece.getRowNum() < 21) {
+                for (TetrominoPiece piece : getPieces()) {
+                    piece.setRowNum(piece.getRowNum() + 1);
+                }
+            }
+            return;
+        }
         switch (direction) {
             case LEFT:
                 TetrominoPiece leftPiece = Collections.min(getPieces(), Comparator.comparing(p -> p.getColNum()));
@@ -54,7 +63,6 @@ public abstract class Tetromino {
                 }
                 break;
             case DOWN:
-                TetrominoPiece bottomPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
                 if (bottomPiece.getRowNum() < 21 && checkBottomCollision()) {
                     for (TetrominoPiece piece : getPieces()) {
                         piece.setRowNum(piece.getRowNum() + 1);

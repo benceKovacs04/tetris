@@ -7,10 +7,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
+
+
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         Game game = new Game();
 
@@ -32,6 +34,11 @@ public class Main extends Application {
                 case W:
                     game.activeTetromino.transform();
                     game.drawActivePiece();
+                    break;
+                case S:
+                    game.activeTetromino.move(Direction.BOTTOM);
+                    game.drawActivePiece();
+                    break;
             }
         });
 
