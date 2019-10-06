@@ -1,6 +1,7 @@
-package com.codecool.tetromino;
+package com.codecool.tetromino.shapes;
 
 import com.codecool.tetris.TetrominoHandler;
+import com.codecool.tetromino.Tetromino;
 import javafx.scene.paint.Color;
 
 import java.util.Map;

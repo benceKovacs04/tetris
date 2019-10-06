@@ -1,6 +1,7 @@
 package com.codecool.tetromino;
 
 import com.codecool.tetris.TetrominoHandler;
+import com.codecool.tetromino.shapes.*;
 
 import java.util.Random;
 

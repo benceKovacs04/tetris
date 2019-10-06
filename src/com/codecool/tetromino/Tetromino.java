@@ -15,17 +15,17 @@ public abstract class Tetromino {
 
     protected int state = 1;
 
-    final int COLNUMBER = 10;
-    final int ROWNUMBER = 22;
+    protected final int COLNUMBER = 10;
+    protected final int ROWNUMBER = 22;
 
-    TetrominoPiece pieceOne = new TetrominoPiece();
-    TetrominoPiece pieceTwo = new TetrominoPiece();
-    TetrominoPiece pieceThree = new TetrominoPiece();
-    TetrominoPiece pieceFour = new TetrominoPiece();
+    protected TetrominoPiece pieceOne = new TetrominoPiece();
+    protected TetrominoPiece pieceTwo = new TetrominoPiece();
+    protected TetrominoPiece pieceThree = new TetrominoPiece();
+    protected TetrominoPiece pieceFour = new TetrominoPiece();
 
-    Set<TetrominoPiece> pieces = new HashSet<>();
+    protected Set<TetrominoPiece> pieces = new HashSet<>();
 
-    TetrominoHandler game;
+    protected TetrominoHandler game;
 
     public Tetromino(TetrominoHandler game) {
         this.game = game;
