@@ -22,7 +22,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     public Game() {
         this.getStyleClass().add("myGridStyle");
-        this.getStylesheets().add("assets/Main.css");
+        this.getStylesheets().add("Main.css");
 
         for (int i = 0; i < COLNUMBER; i++) {
             ColumnConstraints colConst = new ColumnConstraints(25);
