@@ -4,7 +4,6 @@ package com.codecool.tetromino;
 import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.Node;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
