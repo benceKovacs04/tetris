@@ -14,18 +14,18 @@ public class GameTimer {
     private KeyFrame keyframe;
     private Runnable loopMethod;
 
-    GameTimer() {
-        this(DEFAULT_SPEED);
-    }
-
-    GameTimer(double frameTime) {
-        this.frameTime = frameTime;
-    }
-
-    public void setup (Runnable loopMethod) {
+    public GameTimer(Runnable loopMethod) {
         this.loopMethod = loopMethod;
-        timer.setCycleCount(Timeline.INDEFINITE);
+    }
 
+    public void startDefault() {
+        timer.setCycleCount(Timeline.INDEFINITE);
+        frameTime = DEFAULT_SPEED;
+        addKeyFrame();
+        timer.play();
+    }
+
+    private void addKeyFrame() {
         this.keyframe = new KeyFrame(
                 Duration.seconds(frameTime),
                 ae -> loopMethod.run());
@@ -35,12 +35,9 @@ public class GameTimer {
 
     public void updateSpeed(double frameTime) {
         this.frameTime = frameTime;
+        timer.stop();
         timer.getKeyFrames().remove(keyframe);
-        setup(loopMethod);
-        timer.getKeyFrames().get(0).
-    }
-
-    public void play() {
+        addKeyFrame();
         timer.play();
     }
 

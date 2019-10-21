@@ -15,7 +15,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     public static final int COLNUMBER = 10;
     public static final int ROWNUMBER = 22;
-    private GameTimer gameTimer = new GameTimer();
+    private GameTimer gameTimer;
     private TetrominoFactory tetrominoFactory = new TetrominoFactory(this);
     private GameLoop gameLoop;
 
@@ -50,8 +50,8 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     public void init() {
         this.gameLoop = new GameLoop(this);
-        gameTimer.setup(gameLoop::step);
-        gameTimer.play();
+        this.gameTimer = new GameTimer(gameLoop::step);
+        gameTimer.startDefault();
         gameLoop.start();
     }
 
@@ -156,16 +156,16 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         score += 100;
         System.out.println(score);
         switch(score) {
-            case 200:
-                gameTimer.updateSpeed(0.2);
-                break;
-            case 2000:
-                gameTimer.updateSpeed(0.3);
+            case 1000:
+                gameTimer.updateSpeed(0.4);
                 break;
             case 3000:
+                gameTimer.updateSpeed(0.3);
+                break;
+            case 6000:
                 gameTimer.updateSpeed(0.2);
                 break;
-            case 4000:
+            case 10000:
                 gameTimer.updateSpeed(0.1);
         }
     }
