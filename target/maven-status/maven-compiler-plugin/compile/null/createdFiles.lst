@@ -3,7 +3,6 @@ com/codecool/tetromino/CenterPieceTetromino.class
 com/codecool/tetromino/shapes/STetro.class
 com/codecool/tetromino/Tetromino.class
 com/codecool/tetromino/TetrominoPiece.class
-com/codecool/tetris/Game$1.class
 com/codecool/tetromino/Tetromino$1.class
 com/codecool/tetris/TetrominoHandler.class
 com/codecool/tetromino/Direction.class
@@ -11,9 +10,8 @@ com/codecool/tetromino/shapes/LTetro.class
 com/codecool/tetris/Main.class
 com/codecool/tetris/GameLoop.class
 com/codecool/tetromino/shapes/JTetro.class
-com/codecool/tetris/InputHandler$1.class
+com/codecool/tetris/Main$1.class
 com/codecool/tetromino/shapes/TTetro.class
-com/codecool/tetris/InputHandler.class
 com/codecool/tetromino/shapes/BoxTetro.class
 com/codecool/tetromino/shapes/ColTetro.class
 com/codecool/tetris/GameTick.class
