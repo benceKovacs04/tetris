@@ -15,36 +15,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
         Game game = new Game();
+        InputHandler inputHandler = new InputHandler(primaryStage);
+        inputHandler.initInputHandlers(game);
 
         game.spawnNewActiveTetromino();
-        game.drawActivePiece();
-
-        game.init();
-
-        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            switch (event.getCode()) {
-                case A:
-                    game.activeTetromino.move(Direction.LEFT);
-                    game.drawActivePiece();
-                    break;
-                case D:
-                    game.activeTetromino.move(Direction.RIGHT);
-                    game.drawActivePiece();
-                    break;
-                case W:
-                    game.activeTetromino.transform();
-                    game.drawActivePiece();
-                    break;
-                case S:
-                    game.activeTetromino.move(Direction.BOTTOM);
-                    game.drawActivePiece();
-                    break;
-            }
-        });
-
 
         primaryStage.setScene(new Scene(game, 800, 600));
         primaryStage.show();
+
+        game.init();
 
     }
 
