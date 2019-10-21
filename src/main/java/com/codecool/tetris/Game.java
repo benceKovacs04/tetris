@@ -17,6 +17,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     public static final int ROWNUMBER = 22;
     private GameTimer gameTimer = new GameTimer();
     private TetrominoFactory tetrominoFactory = new TetrominoFactory(this);
+    private GameLoop gameLoop;
 
     public Tetromino activeTetromino;
 
@@ -46,14 +47,20 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     public void init() {
-        GameLoop gameLoop = new GameLoop(this);
+        this.gameLoop = new GameLoop(this);
         gameTimer.setup(gameLoop::step);
         gameTimer.play();
+        gameLoop.start();
     }
 
     @Override
     public void spawnNewActiveTetromino() {
-        this.activeTetromino = tetrominoFactory.getRandomTetromino();
+        Tetromino nextTetro = tetrominoFactory.getRandomTetromino();
+        if (nextTetro.canSpawn()) {
+            this.activeTetromino = nextTetro;
+        } else {
+            gameLoop.stop();
+        }
     }
 
     @Override

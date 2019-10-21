@@ -135,8 +135,12 @@ public abstract class Tetromino {
 
     public Set<TetrominoPiece> getPieces() { return pieces; }
 
-    public int getLowestPieceRowNum() {
+    public boolean canSpawn() {
+        return checkBottomCollision();
+    }
+
+    /*public int getLowestPieceRowNum() {
        TetrominoPiece lowestPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
        return lowestPiece.getRowNum();
-    }
+    }*/
 }
