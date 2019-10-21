@@ -53,6 +53,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         gameLoop.start();
     }
 
+
     @Override
     public void spawnNewActiveTetromino() {
         Tetromino nextTetro = tetrominoFactory.getRandomTetromino();
@@ -75,6 +76,30 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         }
 
         return result;
+    }
+
+    @Override
+    public void moveTetromino(Direction dir) {
+        if (gameLoop.isRunning()) {
+            switch (dir) {
+                case LEFT:
+                    activeTetromino.move(Direction.LEFT);
+                    drawActivePiece();
+                    break;
+                case RIGHT:
+                    activeTetromino.move(Direction.RIGHT);
+                    drawActivePiece();
+                    break;
+                case TRANSFORM:
+                    activeTetromino.transform();
+                    drawActivePiece();
+                    break;
+                case BOTTOM:
+                    activeTetromino.move(Direction.BOTTOM);
+                    drawActivePiece();
+                    break;
+            }
+        }
     }
 
     public void drawActivePiece() {
