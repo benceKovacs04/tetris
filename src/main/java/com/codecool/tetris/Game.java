@@ -156,8 +156,8 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         score += 100;
         System.out.println(score);
         switch(score) {
-            case 1000:
-                gameTimer.updateSpeed(0.4);
+            case 200:
+                gameTimer.updateSpeed(0.2);
                 break;
             case 2000:
                 gameTimer.updateSpeed(0.3);

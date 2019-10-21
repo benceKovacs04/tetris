@@ -4,11 +4,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+import java.security.Key;
+
 public class GameTimer {
 
     private static final double DEFAULT_SPEED = 0.5;
     private double frameTime;
     private Timeline timer = new Timeline();
+    private KeyFrame keyframe;
     private Runnable loopMethod;
 
     GameTimer() {
@@ -23,7 +26,7 @@ public class GameTimer {
         this.loopMethod = loopMethod;
         timer.setCycleCount(Timeline.INDEFINITE);
 
-        KeyFrame keyframe = new KeyFrame(
+        this.keyframe = new KeyFrame(
                 Duration.seconds(frameTime),
                 ae -> loopMethod.run());
 
@@ -32,7 +35,9 @@ public class GameTimer {
 
     public void updateSpeed(double frameTime) {
         this.frameTime = frameTime;
+        timer.getKeyFrames().remove(keyframe);
         setup(loopMethod);
+        timer.getKeyFrames().get(0).
     }
 
     public void play() {
