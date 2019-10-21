@@ -19,6 +19,8 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     private TetrominoFactory tetrominoFactory = new TetrominoFactory(this);
     private GameLoop gameLoop;
 
+    private int score = 0;
+
     public Tetromino activeTetromino;
 
     public Game() {
@@ -128,11 +130,10 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
             }
         }
 
-
         for (Node node : row) {
             getChildren().remove(node);
         }
-
+        handleScore();
         movePiecesDown(currentRow);
         handleFullRows();
     }
@@ -148,6 +149,24 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
                     add(piece, colIndex, rowIndex + 1);
                 }
             }
+        }
+    }
+
+    private void handleScore() {
+        score += 100;
+        System.out.println(score);
+        switch(score) {
+            case 1000:
+                gameTimer.updateSpeed(0.4);
+                break;
+            case 2000:
+                gameTimer.updateSpeed(0.3);
+                break;
+            case 3000:
+                gameTimer.updateSpeed(0.2);
+                break;
+            case 4000:
+                gameTimer.updateSpeed(0.1);
         }
     }
 

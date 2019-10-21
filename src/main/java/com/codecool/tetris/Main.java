@@ -19,6 +19,7 @@ public class Main extends Application {
         inputHandler.initInputHandlers(game);
 
         game.spawnNewActiveTetromino();
+        game.drawActivePiece();
 
         primaryStage.setScene(new Scene(game, 800, 600));
         primaryStage.show();
