@@ -85,15 +85,15 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     @Override
-    public void moveTetromino(Direction dir) {
+    public void moveTetromino(Actions dir) {
         if (gameLoop.isRunning()) {
             switch (dir) {
                 case LEFT:
-                    activeTetromino.move(Direction.LEFT);
+                    activeTetromino.move(Actions.LEFT);
                     drawActivePiece();
                     break;
                 case RIGHT:
-                    activeTetromino.move(Direction.RIGHT);
+                    activeTetromino.move(Actions.RIGHT);
                     drawActivePiece();
                     break;
                 case TRANSFORM:
@@ -101,8 +101,19 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
                     drawActivePiece();
                     break;
                 case BOTTOM:
-                    activeTetromino.move(Direction.BOTTOM);
+                    activeTetromino.move(Actions.BOTTOM);
                     drawActivePiece();
+                    break;
+                case STASH:
+                    if(!activeTetromino.haveBeenStashed()) {
+                        activeTetromino.stashIt();
+                        stash.stashTetromino(activeTetromino);
+                        if(stash.getStashedTetromino() != null) {
+                            activeTetromino = stash.getStashedTetromino();
+                        } else {
+                            spawnNewActiveTetromino();
+                        }
+                    }
                     break;
             }
         }
@@ -175,7 +186,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     public void step() {
-        activeTetromino.move(Direction.DOWN);
+        activeTetromino.move(Actions.DOWN);
         drawActivePiece();
     }
 }

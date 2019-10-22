@@ -1,6 +1,9 @@
 package com.codecool.tetris;
 
+import com.codecool.tetromino.Tetromino;
+import com.codecool.tetromino.TetrominoPiece;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -10,6 +13,9 @@ public class Stash extends GridPane{
 
     public static final int STASH_COL_NUM = 6;
     public static final int STASH_ROW_NUM = 6;
+
+    private Tetromino stashedTetromino = null;
+    private boolean alreadyUsed = false;
 
     public Stash() {
         this.getStylesheets().add("Main.css");
@@ -37,4 +43,30 @@ public class Stash extends GridPane{
         this.setPadding(new Insets(155, 0,30,280));
     }
 
+    private void killChildren() {
+        if (stashedTetromino != null) {
+            for (TetrominoPiece piece : stashedTetromino.getPieces()) {
+                getChildren().remove(piece);
+            }
+        }
+    }
+
+    public void stashTetromino(Tetromino tetro) {
+
+        killChildren();
+        stashedTetromino = tetro;
+
+        for (TetrominoPiece piece : stashedTetromino.getPieces()) {
+            this.add(piece, piece.getSpecialGridColNum(), piece.getSpecialGridRowNum());
+        }
+    }
+
+    public Tetromino getStashedTetromino() {
+        if (!alreadyUsed) {
+            alreadyUsed = true;
+            return null;
+        } else {
+            return stashedTetromino;
+        }
+    }
 }

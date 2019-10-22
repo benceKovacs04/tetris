@@ -1,9 +1,10 @@
 package com.codecool.tetromino;
 
-public enum Direction {
+public enum Actions {
     LEFT,
     RIGHT,
     DOWN,
     BOTTOM,
-    TRANSFORM
+    TRANSFORM,
+    STASH
 }

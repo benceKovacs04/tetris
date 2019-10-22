@@ -4,12 +4,11 @@ package com.codecool.tetromino;
 import com.codecool.tetris.TetrominoHandler;
 import javafx.scene.Node;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import static com.codecool.tetromino.Direction.LEFT;
-import static com.codecool.tetromino.Direction.RIGHT;
+import static com.codecool.tetromino.Actions.LEFT;
+import static com.codecool.tetromino.Actions.RIGHT;
 
 public abstract class Tetromino {
 
@@ -37,7 +36,7 @@ public abstract class Tetromino {
         pieces.add(pieceFour);
     }
 
-    public void move(Direction direction) {
+    public void move(Actions actions) {
         TetrominoPiece bottomPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
        /* if(direction == Direction.BOTTOM) {
             while(checkBottomCollision() && bottomPiece.getRowNum() < 21) {
@@ -47,7 +46,7 @@ public abstract class Tetromino {
             }
             return;
         }*/
-        switch (direction) {
+        switch (actions) {
             case LEFT:
                 TetrominoPiece leftPiece = Collections.min(getPieces(), Comparator.comparing(p -> p.getColNum()));
                 if (leftPiece.getColNum() > 0 && checkSideCollision(LEFT)) {
@@ -84,7 +83,7 @@ public abstract class Tetromino {
         }
     }
 
-    private boolean checkSideCollision(Direction dir) {
+    private boolean checkSideCollision(Actions dir) {
         Map<TetrominoPiece, List<Integer>> nextPos = new HashMap<>();
         switch (dir) {
             case LEFT:
@@ -141,7 +140,7 @@ public abstract class Tetromino {
         return checkBottomCollision();
     }
 
-    public boolean isWasStashed() {
+    public boolean haveBeenStashed() {
         return wasStashed;
     }
 

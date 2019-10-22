@@ -1,6 +1,6 @@
 package com.codecool.tetris;
 
-import com.codecool.tetromino.Direction;
+import com.codecool.tetromino.Actions;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
@@ -16,17 +16,19 @@ public class InputHandler {
         primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case A:
-                    game.moveTetromino(Direction.LEFT);
+                    game.moveTetromino(Actions.LEFT);
                     break;
                 case D:
-                    game.moveTetromino(Direction.RIGHT);
+                    game.moveTetromino(Actions.RIGHT);
                     break;
                 case W:
-                    game.moveTetromino(Direction.TRANSFORM);
+                    game.moveTetromino(Actions.TRANSFORM);
                     break;
                 case S:
-                    game.moveTetromino(Direction.BOTTOM);
+                    game.moveTetromino(Actions.BOTTOM);
                     break;
+                case E:
+                    game.moveTetromino(Actions.STASH);
             }
         });
     }
