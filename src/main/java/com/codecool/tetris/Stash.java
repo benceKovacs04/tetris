@@ -13,7 +13,8 @@ public class Stash extends SpecialGrid{
 
 
     public Stash() {
-        this.setPadding(new Insets(155, 0,30,280));
+        this.setPadding(new Insets(30, 0,30,560));
+
     }
 
     public void stashTetromino(Tetromino tetro) {
