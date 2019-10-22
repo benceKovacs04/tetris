@@ -27,6 +27,8 @@ public abstract class Tetromino {
 
     protected TetrominoHandler game;
 
+    private boolean wasStashed = false;
+
     public Tetromino(TetrominoHandler game) {
         this.game = game;
         pieces.add(pieceOne);
@@ -137,6 +139,16 @@ public abstract class Tetromino {
 
     public boolean canSpawn() {
         return checkBottomCollision();
+    }
+
+    public boolean isWasStashed() {
+        return wasStashed;
+    }
+
+    public void stashIt() {
+        if (!wasStashed) {
+            wasStashed = true;
+        }
     }
 
     /*public int getLowestPieceRowNum() {

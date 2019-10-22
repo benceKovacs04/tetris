@@ -27,6 +27,18 @@ public class JTetro extends CenterPieceTetromino {
         pieceFour.setColNum(5);
         pieceFour.setRowNum(1);
 
+        pieceOne.setSpecialGridColNum(4);
+        pieceOne.setSpecialGridRowNum(2);
+
+        pieceTwo.setSpecialGridColNum(4);
+        pieceTwo.setSpecialGridRowNum(3);
+
+        pieceThree.setSpecialGridColNum(6);
+        pieceThree.setSpecialGridRowNum(3);
+
+        pieceFour.setSpecialGridColNum(5);
+        pieceFour.setSpecialGridRowNum(3);
+
         pieceOne.setFill(Color.BLUE);
         pieceTwo.setFill(Color.BLUE);
         pieceThree.setFill(Color.BLUE);

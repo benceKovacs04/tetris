@@ -18,6 +18,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     private GameTimer gameTimer;
     private TetrominoFactory tetrominoFactory = new TetrominoFactory(this);
     private GameLoop gameLoop;
+    private Stash stash;
 
     private int score = 0;
 
@@ -49,6 +50,9 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     public void init() {
+        this.stash = new Stash();
+        stash.init();
+        getChildren().add(stash);
         this.gameLoop = new GameLoop(this);
         this.gameTimer = new GameTimer(gameLoop::step);
         gameTimer.startDefault();

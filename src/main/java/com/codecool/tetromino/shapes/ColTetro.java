@@ -24,6 +24,18 @@ public class ColTetro extends Tetromino {
         pieceFour.setColNum(4);
         pieceFour.setRowNum(3);
 
+        pieceOne.setSpecialGridColNum(4);
+        pieceOne.setSpecialGridRowNum(2);
+
+        pieceTwo.setSpecialGridColNum(4);
+        pieceTwo.setSpecialGridRowNum(3);
+
+        pieceThree.setSpecialGridColNum(4);
+        pieceThree.setSpecialGridRowNum(4);
+
+        pieceFour.setSpecialGridColNum(4);
+        pieceFour.setSpecialGridRowNum(5);
+
         pieceOne.setFill(Color.AQUA);
         pieceTwo.setFill(Color.AQUA);
         pieceThree.setFill(Color.AQUA);

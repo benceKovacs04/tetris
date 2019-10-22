@@ -8,6 +8,9 @@ public class TetrominoPiece extends Rectangle {
     private int rowNum;
     private int colNum;
 
+    private int specialGridRowNum;
+    private int specialGridColNum;
+
     public int getRowNum() {
         return rowNum;
     }
@@ -22,6 +25,22 @@ public class TetrominoPiece extends Rectangle {
 
     public void setColNum(int colNum) {
         this.colNum = colNum;
+    }
+
+    public int getSpecialGridRowNum() {
+        return specialGridRowNum;
+    }
+
+    public void setSpecialGridRowNum(int specialGridRowNum) {
+        this.specialGridRowNum = specialGridRowNum;
+    }
+
+    public int getSpecialGridColNum() {
+        return specialGridColNum;
+    }
+
+    public void setSpecialGridColNum(int specialGridColNum) {
+        this.specialGridColNum = specialGridColNum;
     }
 
     public TetrominoPiece() {

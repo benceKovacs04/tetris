@@ -23,6 +23,18 @@ public class BoxTetro extends Tetromino {
         pieceFour.setColNum(5);
         pieceFour.setRowNum(1);
 
+        pieceOne.setSpecialGridColNum(4);
+        pieceOne.setSpecialGridRowNum(2);
+
+        pieceTwo.setSpecialGridColNum(5);
+        pieceTwo.setSpecialGridRowNum(2);
+
+        pieceThree.setSpecialGridColNum(4);
+        pieceThree.setSpecialGridRowNum(3);
+
+        pieceFour.setSpecialGridColNum(5);
+        pieceFour.setSpecialGridRowNum(3);
+
         pieceOne.setFill(Color.YELLOW);
         pieceTwo.setFill(Color.YELLOW);
         pieceThree.setFill(Color.YELLOW);
