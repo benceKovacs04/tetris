@@ -11,13 +11,12 @@ public class Queue extends SpecialGrid {
     private Tetromino inQueueTetromino;
 
     public Queue() {
-        inQueueTetromino = tetrominoFactory.getRandomTetromino();
-        this.setPadding(new Insets(155, 280,30,0));
-        setGridLinesVisible(true);
+        this.setPadding(new Insets(30, 0,30,100));
     }
 
     public void setTetrominoFactory(TetrominoFactory tetrominoFactory) {
         this.tetrominoFactory = tetrominoFactory;
+        inQueueTetromino = tetrominoFactory.getRandomTetromino();
     }
 
     @Override

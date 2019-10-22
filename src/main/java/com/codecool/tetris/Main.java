@@ -16,10 +16,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        Pane pane = new Pane();
+        Pane rootPane = new Pane();
 
         Stash stash = new Stash();
-        Game game = new Game(stash);
+        stash.init();
+        Queue queue = new Queue();
+        queue.init();
+        Game game = new Game(stash, queue);
 
         InputHandler inputHandler = new InputHandler(primaryStage);
         inputHandler.initInputHandlers(game);
@@ -27,10 +30,10 @@ public class Main extends Application {
         game.spawnNewActiveTetromino();
         game.drawActivePiece();
 
-        pane.getChildren().addAll(game, stash);
+        rootPane.getChildren().addAll(stash, game, queue);
 
 
-        primaryStage.setScene(new Scene(pane, 800, 600));
+        primaryStage.setScene(new Scene(rootPane, 800, 600));
         primaryStage.show();
 
         game.init();
