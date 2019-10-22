@@ -15,17 +15,19 @@ public class STetro extends CenterPieceTetromino {
     public STetro(TetrominoHandler game) {
         super(game);
 
-        pieceOne.setColNum(4);
-        pieceOne.setRowNum(1);
+        PONE_COL = 4;
+        PONE_ROW = 1;
 
-        pieceTwo.setColNum(5);
-        pieceTwo.setRowNum(0);
+        PTWO_COL = 5;
+        PTWO_ROW = 0;
 
-        pieceThree.setColNum(6);
-        pieceThree.setRowNum(0);
+        PTHREE_COL = 6;
+        PTHREE_ROW = 0;
 
-        pieceFour.setColNum(5);
-        pieceFour.setRowNum(1);
+        PFOUR_COL = 5;
+        PFOUR_ROW = 1;
+
+        setDefaultPosition();
 
         pieceOne.setSpecialGridColNum(2);
         pieceOne.setSpecialGridRowNum(3);

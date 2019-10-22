@@ -109,9 +109,11 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
                         activeTetromino.stashIt();
                         stash.stashTetromino(activeTetromino);
                         if(stash.getStashedTetromino() != null) {
-                            activeTetromino = stash.getStashedTetromino();
+                            activeTetromino = (Tetromino) stash.getStashedTetromino();
+                            drawActivePiece();
                         } else {
                             spawnNewActiveTetromino();
+                            drawActivePiece();
                         }
                     }
                     break;

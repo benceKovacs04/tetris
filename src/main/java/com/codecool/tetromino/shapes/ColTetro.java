@@ -12,17 +12,19 @@ public class ColTetro extends Tetromino {
     public ColTetro(TetrominoHandler game) {
         super(game);
 
-        pieceOne.setColNum(4);
-        pieceOne.setRowNum(0);
+        PONE_COL = 4;
+        PONE_ROW = 0;
 
-        pieceTwo.setColNum(4);
-        pieceTwo.setRowNum(1);
+        PTWO_COL = 4;
+        PTWO_ROW = 1;
 
-        pieceThree.setColNum(4);
-        pieceThree.setRowNum(2);
+        PTHREE_COL = 4;
+        PTHREE_ROW = 2;
 
-        pieceFour.setColNum(4);
-        pieceFour.setRowNum(3);
+        PFOUR_COL = 4;
+        PFOUR_ROW = 3;
+
+        setDefaultPosition();
 
         pieceOne.setSpecialGridColNum(3);
         pieceOne.setSpecialGridRowNum(1);

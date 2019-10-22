@@ -10,7 +10,19 @@ import java.util.List;
 import static com.codecool.tetromino.Actions.LEFT;
 import static com.codecool.tetromino.Actions.RIGHT;
 
-public abstract class Tetromino {
+public abstract class Tetromino implements Stashable{
+
+    protected int PONE_COL;
+    protected int PONE_ROW;
+
+    protected int PTWO_COL;
+    protected int PTWO_ROW;
+
+    protected int PTHREE_COL;
+    protected int PTHREE_ROW;
+
+    protected int PFOUR_COL;
+    protected int PFOUR_ROW;
 
     protected int state = 1;
 
@@ -134,6 +146,7 @@ public abstract class Tetromino {
 
     public abstract void transform();
 
+    @Override
     public Set<TetrominoPiece> getPieces() { return pieces; }
 
     public boolean canSpawn() {
@@ -148,6 +161,24 @@ public abstract class Tetromino {
         if (!wasStashed) {
             wasStashed = true;
         }
+    }
+
+    @Override
+    public void setDefaultPosition() {
+
+        state = 1;
+
+        pieceOne.setColNum(PONE_COL);
+        pieceOne.setRowNum(PONE_ROW);
+
+        pieceTwo.setColNum(PTWO_COL);
+        pieceTwo.setRowNum(PTWO_ROW);
+
+        pieceThree.setColNum(PTHREE_COL);
+        pieceThree.setRowNum(PTHREE_ROW);
+
+        pieceFour.setColNum(PFOUR_COL);
+        pieceFour.setRowNum(PFOUR_ROW);
     }
 
     /*public int getLowestPieceRowNum() {
