@@ -54,9 +54,6 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     public void init() {
-        //stash.init();
-        //queue.init();
-        //getChildren().addAll(stash);
         this.gameLoop = new GameLoop(this);
         this.gameTimer = new GameTimer(gameLoop::step);
         gameTimer.startDefault();
@@ -66,7 +63,8 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     @Override
     public void spawnNewActiveTetromino() {
-        Tetromino nextTetro = tetrominoFactory.getRandomTetromino();
+        Tetromino nextTetro = queue.getInQueueTetromino();
+        queue.setNewInQueueTetromino();
         if (nextTetro.canSpawn()) {
             this.activeTetromino = nextTetro;
         } else {
