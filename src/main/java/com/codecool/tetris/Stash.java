@@ -15,6 +15,7 @@ public class Stash extends GridPane{
     public static final int STASH_ROW_NUM = 6;
 
     private Tetromino stashedTetromino = null;
+    private Tetromino previousStashedTetromino = null;
     private boolean alreadyUsed = false;
 
     public Stash() {
@@ -54,6 +55,7 @@ public class Stash extends GridPane{
     public void stashTetromino(Tetromino tetro) {
 
         killChildren();
+        previousStashedTetromino = stashedTetromino;
         stashedTetromino = tetro;
 
         for (TetrominoPiece piece : stashedTetromino.getPieces()) {
@@ -66,7 +68,7 @@ public class Stash extends GridPane{
             alreadyUsed = true;
             return null;
         } else {
-            return stashedTetromino;
+            return previousStashedTetromino;
         }
     }
 }
