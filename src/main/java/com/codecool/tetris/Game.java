@@ -19,12 +19,16 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     private TetrominoFactory tetrominoFactory = new TetrominoFactory(this);
     private GameLoop gameLoop;
     private Stash stash;
+    private Queue queue;
 
     private int score = 0;
 
-    public Tetromino activeTetromino;
+    private Tetromino activeTetromino;
 
-    public Game() {
+    public Game(Stash stash) {
+        //this.queue = queue;
+        //queue.setTetrominoFactory(tetrominoFactory);
+        this.stash = stash;
         this.getStyleClass().add("myGridStyle");
         this.getStylesheets().add("Main.css");
 
@@ -50,9 +54,9 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     public void init() {
-        this.stash = new Stash();
         stash.init();
-        getChildren().add(stash);
+        //queue.init();
+        //getChildren().addAll(stash);
         this.gameLoop = new GameLoop(this);
         this.gameTimer = new GameTimer(gameLoop::step);
         gameTimer.startDefault();
