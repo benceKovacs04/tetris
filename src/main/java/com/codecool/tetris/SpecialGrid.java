@@ -7,7 +7,7 @@ import javafx.scene.layout.RowConstraints;
 
 public abstract class SpecialGrid extends GridPane {
 
-    public static final int SPECIAL_GRID_COL_NUM = 6;
+    public static final int SPECIAL_GRID_COL_NUM = 5;
     public static final int SPECIAL_GRID_ROW_NUM = 6;
 
     public SpecialGrid() {

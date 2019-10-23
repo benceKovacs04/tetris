@@ -29,16 +29,16 @@ public class LTetro extends CenterPieceTetromino {
 
         setDefaultPosition();
 
-        pieceOne.setSpecialGridColNum(2);
+        pieceOne.setSpecialGridColNum(1);
         pieceOne.setSpecialGridRowNum(3);
 
-        pieceTwo.setSpecialGridColNum(4);
+        pieceTwo.setSpecialGridColNum(3);
         pieceTwo.setSpecialGridRowNum(2);
 
-        pieceThree.setSpecialGridColNum(4);
+        pieceThree.setSpecialGridColNum(3);
         pieceThree.setSpecialGridRowNum(3);
 
-        pieceFour.setSpecialGridColNum(3);
+        pieceFour.setSpecialGridColNum(2);
         pieceFour.setSpecialGridRowNum(3);
 
         pieceOne.setFill(Color.ORANGE);
