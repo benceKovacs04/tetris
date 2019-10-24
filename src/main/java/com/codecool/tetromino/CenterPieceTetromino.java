@@ -16,14 +16,14 @@ public abstract class CenterPieceTetromino extends Tetromino {
                 pieceFour.getColNum() <= COLNUMBER - 2 && pieceFour.getColNum() > 0;
     }
 
-    protected abstract Map<TetrominoPiece, List<Integer>> getStateOneTransformationMap();
-    protected abstract Map<TetrominoPiece, List<Integer>> getStateTwoTransformationMap();
-    protected abstract Map<TetrominoPiece, List<Integer>> getStateThreeTransformationMap();
-    protected abstract Map<TetrominoPiece, List<Integer>> getStateFourTransformationMap();
+    protected abstract Map<ActivePiece, List<Integer>> getStateOneTransformationMap();
+    protected abstract Map<ActivePiece, List<Integer>> getStateTwoTransformationMap();
+    protected abstract Map<ActivePiece, List<Integer>> getStateThreeTransformationMap();
+    protected abstract Map<ActivePiece, List<Integer>> getStateFourTransformationMap();
 
     @Override
     public void transform() {
-        Map<TetrominoPiece, List<Integer>> nextState;
+        Map<ActivePiece, List<Integer>> nextState;
         switch (state) {
             case 1:
                 nextState = getStateOneTransformationMap();

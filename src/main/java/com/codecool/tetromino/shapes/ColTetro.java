@@ -2,7 +2,7 @@ package com.codecool.tetromino.shapes;
 
 import com.codecool.tetris.TetrominoHandler;
 import com.codecool.tetromino.Tetromino;
-import com.codecool.tetromino.TetrominoPiece;
+import com.codecool.tetromino.ActivePiece;
 import javafx.scene.paint.Color;
 
 import java.util.*;
@@ -44,8 +44,8 @@ public class ColTetro extends Tetromino {
         pieceFour.setFill(Color.AQUA);
     }
 
-    private Map<TetrominoPiece, List<Integer>> getStateOneTransformationMap() {
-        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+    private Map<ActivePiece, List<Integer>> getStateOneTransformationMap() {
+        Map<ActivePiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceOne.getRowNum() + 2, pieceOne.getColNum() + 2),
                 pieceTwo, Arrays.asList(pieceTwo.getRowNum() + 1, pieceTwo.getColNum() + 1),
                 pieceFour, Arrays.asList(pieceFour.getRowNum() - 1, pieceFour.getColNum() - 1)));
@@ -53,8 +53,8 @@ public class ColTetro extends Tetromino {
         return nextState;
     }
 
-    private Map<TetrominoPiece, List<Integer>> getStateTwoTransformationMap() {
-        Map<TetrominoPiece, List<Integer>> nextState = new HashMap<>(Map.of(
+    private Map<ActivePiece, List<Integer>> getStateTwoTransformationMap() {
+        Map<ActivePiece, List<Integer>> nextState = new HashMap<>(Map.of(
                 pieceOne, Arrays.asList(pieceOne.getRowNum() - 2, pieceOne.getColNum() - 2),
                 pieceTwo, Arrays.asList(pieceTwo.getRowNum() - 1, pieceTwo.getColNum() - 1),
                 pieceFour, Arrays.asList(pieceFour.getRowNum() + 1, pieceFour.getColNum() + 1)));
@@ -64,7 +64,7 @@ public class ColTetro extends Tetromino {
 
     @Override
     public void transform() {
-        Map<TetrominoPiece, List<Integer>> nextState;
+        Map<ActivePiece, List<Integer>> nextState;
         switch (state) {
             case 1:
                 nextState = getStateOneTransformationMap();

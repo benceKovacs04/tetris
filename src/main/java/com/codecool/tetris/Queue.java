@@ -2,7 +2,7 @@ package com.codecool.tetris;
 
 import com.codecool.tetromino.Tetromino;
 import com.codecool.tetromino.TetrominoFactory;
-import com.codecool.tetromino.TetrominoPiece;
+import com.codecool.tetromino.ActivePiece;
 import javafx.geometry.Insets;
 
 public class Queue extends SpecialGrid {
@@ -22,13 +22,13 @@ public class Queue extends SpecialGrid {
 
     @Override
     protected void killChildren() {
-        for (TetrominoPiece piece : inQueueTetromino.getPieces()) {
+        for (ActivePiece piece : inQueueTetromino.getPieces()) {
             getChildren().remove(piece);
         }
     }
 
     private void drawInQueueTetromino() {
-        for (TetrominoPiece piece : inQueueTetromino.getPieces()) {
+        for (ActivePiece piece : inQueueTetromino.getPieces()) {
             this.add(piece, piece.getSpecialGridColNum(), piece.getSpecialGridRowNum());
         }
     }

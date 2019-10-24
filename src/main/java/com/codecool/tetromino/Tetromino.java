@@ -29,12 +29,19 @@ public abstract class Tetromino implements Stashable{
     protected final int COLNUMBER = 10;
     protected final int ROWNUMBER = 22;
 
-    protected TetrominoPiece pieceOne = new TetrominoPiece();
-    protected TetrominoPiece pieceTwo = new TetrominoPiece();
-    protected TetrominoPiece pieceThree = new TetrominoPiece();
-    protected TetrominoPiece pieceFour = new TetrominoPiece();
+    protected ActivePiece pieceOne = new ActivePiece();
+    protected ActivePiece pieceTwo = new ActivePiece();
+    protected ActivePiece pieceThree = new ActivePiece();
+    protected ActivePiece pieceFour = new ActivePiece();
 
-    protected Set<TetrominoPiece> pieces = new HashSet<>();
+    protected ShadowPiece shadowPieceOne = new ShadowPiece();
+    protected ShadowPiece shadowPieceTwo = new ShadowPiece();
+    protected ShadowPiece shadowPieceThree = new ShadowPiece();
+    protected ShadowPiece shadowPieceFour = new ShadowPiece();
+
+    protected Set<ActivePiece> pieces = new HashSet<>(Arrays.asList(pieceOne, pieceTwo, pieceThree, pieceFour));
+
+    protected Set<ShadowPiece> shadowPieces = new HashSet<>(Arrays.asList(shadowPieceOne, shadowPieceTwo, shadowPieceThree, shadowPieceFour));
 
     protected TetrominoHandler game;
 
@@ -42,42 +49,31 @@ public abstract class Tetromino implements Stashable{
 
     public Tetromino(TetrominoHandler game) {
         this.game = game;
-        pieces.add(pieceOne);
-        pieces.add(pieceTwo);
-        pieces.add(pieceThree);
-        pieces.add(pieceFour);
     }
 
     public void move(Actions actions) {
-        TetrominoPiece bottomPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
-       /* if(direction == Direction.BOTTOM) {
-            while(checkBottomCollision() && bottomPiece.getRowNum() < 21) {
-                for (TetrominoPiece piece : getPieces()) {
-                    piece.setRowNum(piece.getRowNum() + 1);
-                }
-            }
-            return;
-        }*/
+        ActivePiece bottomPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
+
         switch (actions) {
             case LEFT:
-                TetrominoPiece leftPiece = Collections.min(getPieces(), Comparator.comparing(p -> p.getColNum()));
+                ActivePiece leftPiece = Collections.min(getPieces(), Comparator.comparing(p -> p.getColNum()));
                 if (leftPiece.getColNum() > 0 && checkSideCollision(LEFT)) {
-                    for (TetrominoPiece piece : getPieces()) {
+                    for (ActivePiece piece : getPieces()) {
                         piece.setColNum(piece.getColNum() - 1);
                     }
                 }
                 break;
             case RIGHT:
-                TetrominoPiece rightPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getColNum()));
+                ActivePiece rightPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getColNum()));
                 if (rightPiece.getColNum() < 9 && checkSideCollision(RIGHT)) {
-                    for (TetrominoPiece piece : getPieces()) {
+                    for (ActivePiece piece : getPieces()) {
                         piece.setColNum(piece.getColNum() + 1);
                     }
                 }
                 break;
             case DOWN:
                 if (bottomPiece.getRowNum() < 21 && checkBottomCollision()) {
-                    for (TetrominoPiece piece : getPieces()) {
+                    for (ActivePiece piece : getPieces()) {
                         piece.setRowNum(piece.getRowNum() + 1);
                     }
                 } else {
@@ -87,7 +83,7 @@ public abstract class Tetromino implements Stashable{
                 break;
             case BOTTOM:
                 while(checkBottomCollision() && bottomPiece.getRowNum() < 21) {
-                    for (TetrominoPiece piece : getPieces()) {
+                    for (ActivePiece piece : getPieces()) {
                         piece.setRowNum(piece.getRowNum() + 1);
                     }
                 }
@@ -96,15 +92,15 @@ public abstract class Tetromino implements Stashable{
     }
 
     private boolean checkSideCollision(Actions dir) {
-        Map<TetrominoPiece, List<Integer>> nextPos = new HashMap<>();
+        Map<ActivePiece, List<Integer>> nextPos = new HashMap<>();
         switch (dir) {
             case LEFT:
-                for (TetrominoPiece piece : pieces) {
+                for (ActivePiece piece : pieces) {
                     nextPos.put(piece, Arrays.asList(piece.getRowNum(), piece.getColNum() - 1));
                 }
                 break;
             case RIGHT:
-                for (TetrominoPiece piece : pieces) {
+                for (ActivePiece piece : pieces) {
                     nextPos.put(piece, Arrays.asList(piece.getRowNum(), piece.getColNum() + 1));
                 }
                 break;
@@ -113,16 +109,16 @@ public abstract class Tetromino implements Stashable{
     }
 
     private boolean checkBottomCollision() {
-        Map<TetrominoPiece, List<Integer>> nextPos = new HashMap<>();
+        Map<ActivePiece, List<Integer>> nextPos = new HashMap<>();
 
-        for (TetrominoPiece piece : pieces) {
+        for (ActivePiece piece : pieces) {
             nextPos.put(piece, Arrays.asList(piece.getRowNum() + 1, piece.getColNum()));
         }
 
         return checkForValidTransformation(nextPos);
     }
 
-    protected boolean checkForValidTransformation(Map<TetrominoPiece, List<Integer>> nextPositions) {
+    protected boolean checkForValidTransformation(Map<ActivePiece, List<Integer>> nextPositions) {
 
         Set<Node> futurePositions = new HashSet<>();
 
@@ -137,8 +133,8 @@ public abstract class Tetromino implements Stashable{
         return true;
     }
 
-    protected void doTransformation(Map<TetrominoPiece, List<Integer>> nextPositions) {
-        for (Map.Entry<TetrominoPiece, List<Integer>> entry : nextPositions.entrySet()) {
+    protected void doTransformation(Map<ActivePiece, List<Integer>> nextPositions) {
+        for (Map.Entry<ActivePiece, List<Integer>> entry : nextPositions.entrySet()) {
             entry.getKey().setRowNum(entry.getValue().get(0));
             entry.getKey().setColNum(entry.getValue().get(1));
         }
@@ -147,7 +143,25 @@ public abstract class Tetromino implements Stashable{
     public abstract void transform();
 
     @Override
-    public Set<TetrominoPiece> getPieces() { return pieces; }
+    public Set<ActivePiece> getPieces() { return pieces; }
+
+    public Set<ShadowPiece> getShadowPieces() {
+        return shadowPieces;
+    }
+
+    private void setDefaultShadow() {
+        shadowPieceOne.setColNum(pieceOne.getColNum());
+        shadowPieceOne.setRowNum(pieceOne.getRowNum());
+
+        shadowPieceTwo.setColNum(pieceTwo.getColNum());
+        shadowPieceTwo.setRowNum(pieceTwo.getRowNum());
+
+        shadowPieceThree.setColNum(pieceThree.getColNum());
+        shadowPieceThree.setRowNum(pieceThree.getRowNum());
+
+        shadowPieceFour.setColNum(pieceFour.getColNum());
+        shadowPieceFour.setRowNum(pieceFour.getRowNum());
+    }
 
     public boolean canSpawn() {
         return checkBottomCollision();
@@ -180,9 +194,4 @@ public abstract class Tetromino implements Stashable{
         pieceFour.setColNum(PFOUR_COL);
         pieceFour.setRowNum(PFOUR_ROW);
     }
-
-    /*public int getLowestPieceRowNum() {
-       TetrominoPiece lowestPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getRowNum()));
-       return lowestPiece.getRowNum();
-    }*/
 }

@@ -2,7 +2,7 @@ package com.codecool.tetris;
 
 import com.codecool.tetromino.Stashable;
 import com.codecool.tetromino.Tetromino;
-import com.codecool.tetromino.TetrominoPiece;
+import com.codecool.tetromino.ActivePiece;
 import javafx.geometry.Insets;
 
 public class Stash extends SpecialGrid{
@@ -22,7 +22,7 @@ public class Stash extends SpecialGrid{
         previousStashedTetromino = stashedTetromino;
         stashedTetromino = tetro;
 
-        for (TetrominoPiece piece : stashedTetromino.getPieces()) {
+        for (ActivePiece piece : stashedTetromino.getPieces()) {
             this.add(piece, piece.getSpecialGridColNum(), piece.getSpecialGridRowNum());
         }
     }
@@ -30,7 +30,7 @@ public class Stash extends SpecialGrid{
     @Override
     protected void killChildren() {
         if (stashedTetromino != null) {
-            for (TetrominoPiece piece : stashedTetromino.getPieces()) {
+            for (ActivePiece piece : stashedTetromino.getPieces()) {
                 getChildren().remove(piece);
             }
         }
