@@ -9,4 +9,5 @@ public interface TetrominoHandler {
     Node getNodeByRowColumnIndex(int row, int column);
     void handleFullRows();
     void moveTetromino(Actions dir);
+    void killShadow();
 }

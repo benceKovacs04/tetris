@@ -92,19 +92,21 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
             switch (dir) {
                 case LEFT:
                     activeTetromino.move(Actions.LEFT);
-                    drawActivePiece();
+                    drawActiveAndShadowPieces();
                     break;
                 case RIGHT:
                     activeTetromino.move(Actions.RIGHT);
-                    drawActivePiece();
+                    drawActiveAndShadowPieces();
                     break;
                 case TRANSFORM:
                     activeTetromino.transform();
-                    drawActivePiece();
+                    killShadow();
+                    activeTetromino.handleShadow();
+                    drawActiveAndShadowPieces();
                     break;
                 case BOTTOM:
                     activeTetromino.move(Actions.BOTTOM);
-                    drawActivePiece();
+                    drawActiveAndShadowPieces();
                     break;
                 case STASH:
                     if(!activeTetromino.haveBeenStashed()) {
@@ -116,16 +118,29 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
                             spawnNewActiveTetromino();
                         }
                     }
-                    drawActivePiece();
+                    drawActiveAndShadowPieces();
                     break;
             }
         }
     }
 
-    public void drawActivePiece() {
+    public void drawActiveAndShadowPieces() {
         for (TetrominoPiece piece : activeTetromino.getPieces()) {
             this.getChildren().remove(piece);
             this.add(piece, piece.getColNum(), piece.getRowNum());
+        }
+        killShadow();
+        for (TetrominoPiece piece : activeTetromino.getShadowPieces()) {
+            this.add(piece, piece.getColNum(), piece.getRowNum());
+        }
+    }
+
+    @Override
+    public void killShadow() {
+        for (TetrominoPiece shadowPiece : activeTetromino.getShadowPieces()) {
+            if (getChildren().contains(shadowPiece)) {
+                getChildren().remove(shadowPiece);
+            }
         }
     }
 
@@ -190,6 +205,6 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     public void step() {
         activeTetromino.move(Actions.DOWN);
-        drawActivePiece();
+        drawActiveAndShadowPieces();
     }
 }

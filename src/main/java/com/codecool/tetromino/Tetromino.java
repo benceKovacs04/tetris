@@ -59,10 +59,6 @@ public abstract class Tetromino implements Stashable{
 
     public Tetromino(TetrominoHandler game) {
         this.game = game;
-        pieces.add(pieceOne);
-        pieces.add(pieceTwo);
-        pieces.add(pieceThree);
-        pieces.add(pieceFour);
     }
 
     public void move(Actions actions) {
@@ -76,6 +72,9 @@ public abstract class Tetromino implements Stashable{
                         piece.setColNum(piece.getColNum() - 1);
                     }
                 }
+                game.killShadow();
+                setDefaultShadow();
+                moveShadowToPosition();
                 break;
             case RIGHT:
                 TetrominoPiece rightPiece = Collections.max(getPieces(), Comparator.comparing(p -> p.getColNum()));
@@ -84,6 +83,9 @@ public abstract class Tetromino implements Stashable{
                         piece.setColNum(piece.getColNum() + 1);
                     }
                 }
+                game.killShadow();
+                setDefaultShadow();
+                moveShadowToPosition();
                 break;
             case DOWN:
                 if (bottomPiece.getRowNum() < 21 && checkBottomCollision(pieces)) {
@@ -152,6 +154,8 @@ public abstract class Tetromino implements Stashable{
             entry.getKey().setRowNum(entry.getValue().get(0));
             entry.getKey().setColNum(entry.getValue().get(1));
         }
+        setDefaultShadow();
+        moveShadowToPosition();
     }
 
     public abstract void transform();
@@ -160,6 +164,34 @@ public abstract class Tetromino implements Stashable{
     public Set<TetrominoPiece> getPieces() { return pieces; }
 
     public Set<TetrominoPiece> getShadowPieces() { return shadowPieces; }
+
+    private void setDefaultShadow() {
+        shadowPieceOne.setColNum(pieceOne.getColNum());
+        shadowPieceOne.setRowNum(pieceOne.getRowNum());
+
+        shadowPieceTwo.setColNum(pieceTwo.getColNum());
+        shadowPieceTwo.setRowNum(pieceTwo.getRowNum());
+
+        shadowPieceThree.setColNum(pieceThree.getColNum());
+        shadowPieceThree.setRowNum(pieceThree.getRowNum());
+
+        shadowPieceFour.setColNum(pieceFour.getColNum());
+        shadowPieceFour.setRowNum(pieceFour.getRowNum());
+    }
+
+    private void moveShadowToPosition() {
+        TetrominoPiece bottomPiece = Collections.max(getShadowPieces(), Comparator.comparing(p -> p.getRowNum()));
+        while(checkBottomCollision(shadowPieces) && bottomPiece.getRowNum() < 21) {
+            for (TetrominoPiece piece : getShadowPieces()) {
+                piece.setRowNum(piece.getRowNum() + 1);
+            }
+        }
+    }
+
+    public void handleShadow() {
+        setDefaultShadow();
+        moveShadowToPosition();
+    }
 
     public boolean canSpawn() {
         return checkBottomCollision(pieces);
