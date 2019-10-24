@@ -141,12 +141,7 @@ public abstract class Tetromino implements Stashable{
         for (List<Integer> coordinates : nextPositions.values()) {
             futurePositions.add(game.getNodeByRowColumnIndex(coordinates.get(0), coordinates.get(1)));
         }
-        /*for (Node futurePosition : futurePositions) {
-            if (futurePosition instanceof ShadowPiece){
-                game.killShadow();
-                checkForValidTransformation(nextPositions);
-            }
-        }*/
+
         for (Node node : futurePositions) {
             if (!(node instanceof ShadowPiece) && node != null && !getPieces().contains(node)) {
                 return false;
