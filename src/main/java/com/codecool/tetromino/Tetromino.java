@@ -34,7 +34,24 @@ public abstract class Tetromino implements Stashable{
     protected TetrominoPiece pieceThree = new TetrominoPiece();
     protected TetrominoPiece pieceFour = new TetrominoPiece();
 
-    protected Set<TetrominoPiece> pieces = new HashSet<>();
+    protected TetrominoPiece shadowPieceOne = new TetrominoPiece();
+    protected TetrominoPiece shadowPieceTwo = new TetrominoPiece();
+    protected TetrominoPiece shadowPieceThree = new TetrominoPiece();
+    protected TetrominoPiece shadowPieceFour = new TetrominoPiece();
+
+    protected Set<TetrominoPiece> pieces = new HashSet<>(Arrays.asList(
+            pieceOne,
+            pieceTwo,
+            pieceThree,
+            pieceFour
+    ));
+
+    protected Set<TetrominoPiece> shadowPieces = new HashSet<>(Arrays.asList(
+            shadowPieceOne,
+            shadowPieceTwo,
+            shadowPieceThree,
+            shadowPieceFour
+    ));
 
     protected TetrominoHandler game;
 
@@ -141,6 +158,8 @@ public abstract class Tetromino implements Stashable{
 
     @Override
     public Set<TetrominoPiece> getPieces() { return pieces; }
+
+    public Set<TetrominoPiece> getShadowPieces() { return shadowPieces; }
 
     public boolean canSpawn() {
         return checkBottomCollision(pieces);
