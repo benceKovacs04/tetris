@@ -34,10 +34,10 @@ public abstract class Tetromino implements Stashable{
     protected TetrominoPiece pieceThree = new TetrominoPiece();
     protected TetrominoPiece pieceFour = new TetrominoPiece();
 
-    protected TetrominoPiece shadowPieceOne = new TetrominoPiece();
-    protected TetrominoPiece shadowPieceTwo = new TetrominoPiece();
-    protected TetrominoPiece shadowPieceThree = new TetrominoPiece();
-    protected TetrominoPiece shadowPieceFour = new TetrominoPiece();
+    protected ShadowPiece shadowPieceOne = new ShadowPiece();
+    protected ShadowPiece shadowPieceTwo = new ShadowPiece();
+    protected ShadowPiece shadowPieceThree = new ShadowPiece();
+    protected ShadowPiece shadowPieceFour = new ShadowPiece();
 
     protected Set<TetrominoPiece> pieces = new HashSet<>(Arrays.asList(
             pieceOne,
@@ -141,11 +141,18 @@ public abstract class Tetromino implements Stashable{
         for (List<Integer> coordinates : nextPositions.values()) {
             futurePositions.add(game.getNodeByRowColumnIndex(coordinates.get(0), coordinates.get(1)));
         }
+        /*for (Node futurePosition : futurePositions) {
+            if (futurePosition instanceof ShadowPiece){
+                game.killShadow();
+                checkForValidTransformation(nextPositions);
+            }
+        }*/
         for (Node node : futurePositions) {
-            if (node != null && !getPieces().contains(node)) {
+            if (!(node instanceof ShadowPiece) && node != null && !getPieces().contains(node)) {
                 return false;
             }
         }
+
         return true;
     }
 

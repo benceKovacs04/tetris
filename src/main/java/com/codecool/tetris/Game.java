@@ -63,6 +63,9 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
 
     @Override
     public void spawnNewActiveTetromino() {
+        if (activeTetromino != null) {
+            killShadow();
+        }
         Tetromino nextTetro = queue.getInQueueTetromino();
         queue.setNewInQueueTetromino();
         if (nextTetro.canSpawn()) {
@@ -110,11 +113,13 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
                     drawActiveAndShadowPieces();
                     break;
                 case STASH:
+                    killShadow();
                     if(!activeTetromino.haveBeenStashed()) {
                         activeTetromino.stashIt();
                         stash.stashTetromino(activeTetromino);
                         if(stash.getStashedTetromino() != null) {
                             activeTetromino = (Tetromino) stash.getStashedTetromino();
+                            activeTetromino.handleShadow();
                         } else {
                             spawnNewActiveTetromino();
                         }
@@ -140,7 +145,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     public void killShadow() {
         for (TetrominoPiece shadowPiece : activeTetromino.getShadowPieces()) {
             if (getChildren().contains(shadowPiece)) {
-                getChildren().remove(shadowPiece);
+               getChildren().remove(shadowPiece);
             }
         }
     }
