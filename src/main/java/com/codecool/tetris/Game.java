@@ -70,6 +70,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
         } else {
             gameLoop.stop();
         }
+        activeTetromino.handleShadow();
     }
 
     @Override
