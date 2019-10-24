@@ -123,7 +123,7 @@ public class Game extends GridPane implements GameTick, TetrominoHandler {
     }
 
     public void drawActivePiece() {
-        for (ActivePiece piece : activeTetromino.getPieces()) {
+        for (TetrominoPiece piece : activeTetromino.getPieces()) {
             this.getChildren().remove(piece);
             this.add(piece, piece.getColNum(), piece.getRowNum());
         }
