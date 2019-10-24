@@ -14,6 +14,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
         Pane rootPane = new Pane();
+        rootPane.getStyleClass().add("background");
+        rootPane.getStylesheets().add("Main.css");
 
         Stash stash = new Stash();
         stash.init();
@@ -31,6 +33,7 @@ public class Main extends Application {
 
 
         primaryStage.setScene(new Scene(rootPane, 800, 600));
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         game.init();

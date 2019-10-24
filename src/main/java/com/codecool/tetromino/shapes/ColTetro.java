@@ -39,9 +39,13 @@ public class ColTetro extends Tetromino {
         pieceFour.setSpecialGridRowNum(4);
 
         pieceOne.setFill(Color.AQUA);
+        pieceOne.setStroke(Color.LIGHTGREY);
         pieceTwo.setFill(Color.AQUA);
+        pieceTwo.setStroke(Color.LIGHTGREY);
         pieceThree.setFill(Color.AQUA);
+        pieceThree.setStroke(Color.LIGHTGREY);
         pieceFour.setFill(Color.AQUA);
+        pieceFour.setStroke(Color.LIGHTGREY);
     }
 
     private Map<TetrominoPiece, List<Integer>> getStateOneTransformationMap() {

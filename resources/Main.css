@@ -1,4 +1,8 @@
 .game-grid-cell {
     -fx-background-color: lightgrey;
+    -fx-opacity: 0.8;
 }
 
+.background {
+    -fx-background-image: url("background.png");
+}
